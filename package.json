@@ -1,0 +1,97 @@
+{
+  "name": "coolkit",
+  "version": "1.0.0",
+  "description": "Koa api development kit",
+  "scripts": {
+    "dev": "nodemon bin/server.dev.js",
+    "prebuild": "rimraf dist",
+    "build": "node bin/server.build.js",
+    "nuxt": "cross-env NODE_ENV=production nuxt build",
+    "start": "cross-env NODE_ENV=production node dist/server/core",
+    "doc": "apidoc -i src/ -o doc/",
+    "test": "jest --forceExit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smitray/coolkit.git"
+  },
+  "keywords": [
+    "Boilerplate",
+    "webapp",
+    "Koa",
+    "Vue",
+    "SSR"
+  ],
+  "author": "Smit Ray <humancoder@outlook.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smitray/coolkit/issues"
+  },
+  "homepage": "https://github.com/smitray/coolkit#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^1.29.1",
+    "cross-env": "^5.1.4",
+    "fs-promise": "^2.0.3",
+    "glob": "^7.1.2",
+    "grant": "^3.8.1",
+    "isdev": "^1.0.1",
+    "jsonwebtoken": "^8.1.0",
+    "kcors": "^2.2.1",
+    "koa": "^2.4.1",
+    "koa-body": "^2.5.0",
+    "koa-compose": "^4.0.0",
+    "koa-compress": "^2.0.0",
+    "koa-connect": "^2.0.0",
+    "koa-convert": "^1.2.0",
+    "koa-helmet": "^3.3.0",
+    "koa-logger": "^3.1.0",
+    "koa-mount": "^3.0.0",
+    "koa-router": "^7.3.0",
+    "koa-session": "^5.8.1",
+    "koa-static": "^4.0.2",
+    "lodash": "^4.17.4",
+    "log4js": "^2.4.1",
+    "moment": "^2.20.1",
+    "mongoose": "^4.13.9",
+    "mongoose-timestamp": "^0.6.0",
+    "mongoose-unique-validator": "^1.0.6",
+    "purest": "^3.1.0",
+    "shortid": "^2.2.8",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4"
+  },
+  "devDependencies": {
+    "apidoc": "^0.17.6",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-plugin-module-resolver": "^3.0.0",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-import-resolver-babel-module": "^4.0.0",
+    "eslint-import-resolver-webpack": "^0.8.4",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^4.0.1",
+    "eslint-plugin-import": "^2.8.0",
+    "jest": "^22.4.3",
+    "nodemon": "^1.14.9",
+    "rimraf": "^2.6.2",
+    "shelljs": "^0.8.1",
+    "supertest": "^3.0.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+        "/node_modules/",
+        "/config"
+    ],
+    "testEnvironment": "node"
+  }
+}
