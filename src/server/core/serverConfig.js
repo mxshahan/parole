@@ -6,6 +6,7 @@ import helmet from 'koa-helmet';
 import config from 'config';
 import serve from 'koa-static';
 import mount from 'koa-mount';
+// import serve from 'koa-static-server';
 
 import { cModules, cMiddleware } from '../app';
 import { catchErr, statusMessage } from './errorConfig';
@@ -13,8 +14,9 @@ import { catchErr, statusMessage } from './errorConfig';
 function baseConfig(app, io) {
   app.keys = config.get('secret');
   app.proxy = true;
+  // app.use(serve(config.get('paths.dist.server')));
 
-  app.use(mount('/static', serve(config.get('paths.static'))));
+  app.use(mount(serve(config.get('paths.dist.server'))));
 
   app.use(convert.compose(
     catchErr,

@@ -1,55 +1,55 @@
 import {
-  authAll,
-  authSingle,
-  authCreate,
-  authUpdate,
-  authDelete,
-  authLocal
+  userAll,
+  userSingle,
+  userCreate,
+  userUpdate,
+  userDelete,
+  userLocal
 } from './controller';
 
-export const baseUrl = '/auth';
+export const baseUrl = '/user';
 
-export default [
+export const routes = [
   {
     method: 'GET',
     route: '/',
     handlers: [
-      authAll
+      userAll
     ]
   },
   {
     method: 'GET',
     route: '/:id',
     handlers: [
-      authSingle
+      userSingle
     ]
   },
   {
     method: 'PUT',
     route: '/:id',
     handlers: [
-      authUpdate
+      userUpdate
     ]
   },
   {
     method: 'DELETE',
     route: '/:id',
     handlers: [
-      authDelete
+      userDelete
     ]
   },
   {
     method: 'POST',
     route: '/',
     handlers: [
-      authCreate
+      userCreate
     ]
   },
   {
     method: 'POST',
     route: '/local',
     handlers: [
-      authLocal
+      userLocal
     ]
   }
 ];

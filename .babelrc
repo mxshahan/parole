@@ -7,12 +7,12 @@
           "node": "current"
         }
       }
-    ]
+    ],
+    "react"
   ],
   "plugins": [
     "transform-async-to-generator",
     "syntax-async-functions",
-    "transform-runtime",
     ["module-resolver", {
       "alias": {
         "@utl": "./src/server/app/utility",

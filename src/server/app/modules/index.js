@@ -1,42 +1,35 @@
-// Do not touch the auto loader function
-import glob from 'glob';
 import Router from 'koa-router';
-import fs from 'fs';
 
-export default function (app, io) {
-  glob(`${__dirname}/*`, { ignore: '**/index.js' }, (err, matches) => {
-    if (err) { throw err; }
+import { UserRouteProps } from './user';
 
-    matches.forEach((mod) => {
-      const router = require(`${mod}/router`); // eslint-disable-line
+const routerControllPros = [
+  UserRouteProps
+];
 
-      if (fs.existsSync(`${mod}/socket.js`)) {
-        const socketLib = require(`${mod}/socket`); // eslint-disable-line
-        socketLib.default(io);
-      }
+let instance;
 
-      const routes = router.default;
-      const { baseUrl } = router;
-      const instance = new Router({ prefix: baseUrl });
+const routerControl = (app) => {
+  routerControllPros.forEach((routeProperty) => {
+    instance = new Router({ prefix: routeProperty.baseUrl });
+    routeProperty.routes.forEach((config) => {
+      const {
+        method = '',
+        route = '',
+        handlers = []
+      } = config;
 
-      routes.forEach((config) => {
-        const {
-          method = '',
-          route = '',
-          handlers = []
-        } = config;
+      const lastHandler = handlers.pop();
 
-        const lastHandler = handlers.pop();
-
-        instance[method.toLowerCase()](route, ...handlers, async (ctx) => {
-          const hddd = await lastHandler(ctx);
-          return hddd;
-        });
-
-        app
-          .use(instance.routes())
-          .use(instance.allowedMethods());
+      instance[method.toLowerCase()](route, ...handlers, async (ctx) => {
+        const hddd = await lastHandler(ctx);
+        return hddd;
       });
+
+      app
+        .use(instance.routes())
+        .use(instance.allowedMethods());
     });
   });
-}
+};
+
+export default routerControl;

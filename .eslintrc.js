@@ -11,7 +11,7 @@ module.exports = {
     'node': true,
     'browser': true
   },
-  extends: 'airbnb-base',
+  extends: ['airbnb-base', 'standard', 'standard-react'],
   plugins: [
     'html',
     'import'
