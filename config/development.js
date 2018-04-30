@@ -5,7 +5,7 @@ module.exports = {
   },
   db: {
 		host: 'localhost',
-		dbName: 'kibita',
+		dbName: 'parole',
 		debug: false,
 		options: {
 			userName: false,

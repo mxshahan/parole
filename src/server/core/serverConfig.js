@@ -6,18 +6,17 @@ import helmet from 'koa-helmet';
 import config from 'config';
 import serve from 'koa-static';
 import mount from 'koa-mount';
-// import serve from 'koa-static-server';
+import historyApiFallback from 'koa-history-api-fallback';
 
-import { cModules, cMiddleware } from '../app';
+import { cModules } from '../app';
 import { catchErr, statusMessage } from './errorConfig';
 
-function baseConfig(app, io) {
+function baseConfig(app) {
   app.keys = config.get('secret');
   app.proxy = true;
-  // app.use(serve(config.get('paths.dist.server')));
 
+  app.use(historyApiFallback());
   app.use(mount(serve(config.get('paths.dist.server'))));
-
   app.use(convert.compose(
     catchErr,
     cors({
@@ -35,8 +34,8 @@ function baseConfig(app, io) {
     statusMessage
   ));
 
-  cModules(app, io);
-  app.use(cMiddleware());
+  cModules(app);
+  // app.use(cMiddleware());
 }
 
 export default baseConfig;

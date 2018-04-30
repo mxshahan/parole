@@ -2,15 +2,13 @@ import 'babel-polyfill';
 import Koa from 'koa';
 import config from 'config';
 import http from 'http';
-import socket from 'socket.io';
 import baseConfig from './serverConfig';
 import appLogger from './loggerConfig';
 import connectDatabase from './databaseConfig';
 
 const app = new Koa();
 const server = http.createServer(app.callback());
-const io = socket(server);
-baseConfig(app, io);
+baseConfig(app);
 appLogger(app);
 
 (async () => {

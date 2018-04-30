@@ -4,7 +4,15 @@ import timestamp from 'mongoose-timestamp';
 import { genSaltSync, hashSync } from 'bcryptjs';
 import { Crud } from '@utl';
 
-const authSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
+  firstname: {
+    type: String,
+    required: true
+  },
+  lastname: {
+    type: String,
+    required: true
+  },
   username: {
     type: String,
     required: true,
@@ -19,17 +27,9 @@ const authSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  acc_status: {
-    type: String,
-    default: 'new'
-  },
   acc_type: {
     type: String,
-    default: 'client'
-  },
-  role: {
-    type: String,
-    default: null
+    default: 'ordinary'
   },
   social: {
     facebook: {
@@ -55,7 +55,7 @@ const authSchema = new mongoose.Schema({
   }
 });
 
-authSchema.pre('save', function hashPass(next) {
+userSchema.pre('save', function hashPass(next) {
   const account = this;
   let hash;
   if (this.isModified('password') || this.isNew) {
@@ -71,13 +71,13 @@ authSchema.pre('save', function hashPass(next) {
   return next();
 });
 
-authSchema.plugin(uniqueValidator);
-authSchema.plugin(timestamp);
+userSchema.plugin(uniqueValidator);
+userSchema.plugin(timestamp);
 
-const authModel = mongoose.model('authModel', authSchema);
-const authCrud = new Crud(authModel);
+const userModel = mongoose.model('userModel', userSchema);
+const userCrud = new Crud(userModel);
 
 export {
-  authCrud,
-  authModel
+  userCrud,
+  userModel
 };

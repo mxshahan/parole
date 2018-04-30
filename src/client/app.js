@@ -1,27 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Axios from 'axios'
+import { Provider } from 'react-redux'
+import AppRouter from './Routes'
+import configureStore from './Store/Store'
+import './Styles/style.scss'
 
-class App extends React.Component {
-  state = {
-    data: 'hi'
-  }
-  componentDidMount () {
-    const a = this.state
-    Axios.get('./user').then((res) => {
-      console.log(res)
-    }).catch((e) => {
-      console.log(e)
-    })
-  }
+const store = configureStore()
 
-  render () {
-    return (
-      <div>
-        {this.state.data}
-      </div>
-    )
-  }
-}
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+)
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(jsx, document.getElementById('app'))

@@ -1,1 +1,6 @@
-export { default as Crud } from './Crud'; // eslint-disable-line
+export { default as Crud } from './Crud';
+export {
+  jwtVerify,
+  generateJwt,
+  decodeToken
+} from './jwt';
