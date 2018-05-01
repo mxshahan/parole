@@ -2,11 +2,13 @@ import { compareSync } from 'bcryptjs';
 import { sign as jwtSign } from 'jsonwebtoken';
 import config from 'config';
 import { userCrud } from './user.model';
-
+import { generateJwt } from '@utl';
 
 let user;
+let VerifyUser;
 let userNew;
 const { 0: secret } = config.get('secret');
+let token;
 
 const userAll = async (ctx) => {
   try {
@@ -25,34 +27,76 @@ const userAll = async (ctx) => {
 };
 
 const userSingle = async (ctx) => {
-  try {
-    user = await userCrud.single({ _id: ctx.params.id });
-  } catch (e) {
-    ctx.throw(404, e.message);
-  } finally {
-    ctx.body = {
-      body: user
-    };
-  }
+  console.log('hey')
+  // try {
+  //   user = await userCrud.single({ 
+  //     qr: { _id: ctx.params.id }
+  //   });
+  // } catch (e) {
+  //   ctx.throw(404, e.message);
+  // } finally {
+  //   ctx.body = {
+  //     body: user
+  //   };
+  // }
 };
 
+const myAccount = async (ctx) => {
+  console.log('hey')
+}
+
 const userCreate = async (ctx) => {
+  // console.log(ctx.request.body);
   try {
     userNew = await userCrud.create(ctx.request.body);
   } catch (e) {
     ctx.throw(422, e.message);
   } finally {
+    token = await generateJwt({
+      uid: userNew._id
+    })
     ctx.body = {
-      body: userNew
+      data: {
+        acc_type: userNew.acc_type,
+        token
+      },
+      message: 'SignUp Successfull...'
     };
   }
 };
+
+const userLogin = async (ctx) => {
+  user = await userCrud.single({
+    qr: { email: ctx.request.body.email }
+  });
+  try {
+    if (user) {
+      VerifyUser = await compareSync(ctx.request.body.password, user.password);
+    }
+  } catch (e) {
+    ctx.throw(404, e.message);
+  } finally {
+    if (VerifyUser) {
+      token = await generateJwt({
+        uid: user._id
+      });
+      ctx.body = {
+        data: {
+          acc_type: user.acc_type,
+          token
+        },
+        message: 'Login Successfull...'
+      };
+    }
+  }
+};
+  
 
 const userUpdate = async (ctx) => {
   try {
     user = await userCrud.put({
       params: {
-        _id: ctx.params.id
+        qr: { _id: ctx.state.user.uid }
       },
       body: ctx.request.body
     });
@@ -60,70 +104,29 @@ const userUpdate = async (ctx) => {
     ctx.throw(422, e.message);
   } finally {
     ctx.body = {
-      body: user
+      body: user,
+      message: 'Your account successfully updated'
     };
   }
 };
 
 const userDelete = async (ctx) => {
   try {
-    user = await userCrud.delete({ _id: ctx.params.id });
+    user = await userCrud.delete({ 
+      params: {
+      qr: { _id: ctx.state.user.uid }
+    }, 
+  });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
     ctx.body = {
-      body: user
+      message: 'Your account successfully deleted'
     };
   }
 };
 
-const userLocal = async (ctx) => {
-  const {
-    username,
-    password,
-    email,
-    signup
-  } = ctx.request.body;
-  user = await userCrud.single({
-    $or: [{
-      username
-    }, {
-      email: username
-    }]
-  });
-  if (signup && !user) {
-    try {
-      user = await userCrud.create({
-        username,
-        password,
-        email
-      });
-    } catch (e) {
-      ctx.throw(422, e.message);
-    }
-  } else if (signup && user) {
-    ctx.throw(409, { message: 'Email or username already registered!!' });
-  } else if (!user) {
-    ctx.throw(401, { message: 'No user found' });
-  } else if (user && !compareSync(password, user.password)) {
-    ctx.throw(401, { message: 'Password given is wrong' });
-  }
-  const token = jwtSign({
-    data: {
-      uid: user._id,
-      acc_type: user.acc_type
-    },
-    iat: Math.floor(Date.now() / 1000),
-    exp: Math.floor(Date.now() / 1000) + 21600
-  }, secret);
-  ctx.session.token = token;
-  ctx.body = {
-    data: {
-      token
-    },
-    message: 'Loggedin successfully'
-  };
-};
+
 
 export {
   userAll,
@@ -131,5 +134,6 @@ export {
   userCreate,
   userUpdate,
   userDelete,
-  userLocal
+  userLogin,
+  myAccount
 };

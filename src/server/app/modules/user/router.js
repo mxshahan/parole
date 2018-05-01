@@ -4,10 +4,12 @@ import {
   userCreate,
   userUpdate,
   userDelete,
-  userLocal
+  userLogin,
+  myAccount
 } from './controller';
+import { isAuthenticated } from '@mid';
 
-export const baseUrl = '/user';
+export const baseUrl = '/api/user';
 
 export const routes = [
   {
@@ -19,6 +21,13 @@ export const routes = [
   },
   {
     method: 'GET',
+    route: '/',
+    handlers: [
+      myAccount
+    ]
+  },
+  {
+    method: 'GET',
     route: '/:id',
     handlers: [
       userSingle
@@ -26,30 +35,32 @@ export const routes = [
   },
   {
     method: 'PUT',
-    route: '/:id',
+    route: '/',
     handlers: [
+      isAuthenticated,
       userUpdate
     ]
   },
   {
     method: 'DELETE',
-    route: '/:id',
+    route: '/',
     handlers: [
+      isAuthenticated,
       userDelete
     ]
   },
   {
     method: 'POST',
-    route: '/',
+    route: '/create',
     handlers: [
       userCreate
     ]
   },
   {
     method: 'POST',
-    route: '/local',
+    route: '/login',
     handlers: [
-      userLocal
+      userLogin
     ]
   }
 ];
