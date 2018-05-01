@@ -1,26 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+
 
 const Grid = () => (
   <div className="grid">
   <h3>Consectetur adipisicing elit</h3>
-  <a href="single.html"><img src="images/g1 copy.png" title="video-name" /></a>
+  <Link to={"/single/121212"}><img src="/images/g1 copy.png" title="video-name" /></Link>
   <div className="time">
     <span>00:10</span>
   </div>
   <div className="grid-info">
     <div className="video-share">
       <ul>
-        <li><a href="#"><img src="images/likes.png" title="links" /></a></li>
-        <li><a href="#"><img src="images/link.png" title="Link" /></a></li>
-        <li><a href="#"><img src="images/views.png" title="Views" /></a></li>
+        <li><Link to="#"><img src="/images/likes.png" title="links" /></Link></li>
+        <li><Link to="#"><img src="/images/link.png" title="Link" /></Link></li>
+        <li><Link to="#"><img src="/images/views.png" title="Views" /></Link></li>
       </ul>
     </div>
     <div className="video-watch">
-      <a href="single.html">Watch Now</a>
+      <Link to="single.html">Watch Now</Link>
     </div>
     <div className="clear"> </div>
     <div className="lables">
-      <p>Labels:<a href="categories.html">Lorem</a></p>
+      <p>Labels:<Link to="categories.html">Lorem</Link></p>
     </div>
   </div>
 </div>

@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'ordinary'
   },
+  contents: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'contentModel'
+  }],
   social: {
     facebook: {
       id: String,

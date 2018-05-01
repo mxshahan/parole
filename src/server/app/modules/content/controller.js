@@ -1,16 +1,16 @@
 import { compareSync } from 'bcryptjs';
 import { sign as jwtSign } from 'jsonwebtoken';
 import config from 'config';
-import { userCrud } from './user.model';
+import { contentCrud } from './content.model';
 
 
-let user;
-let userNew;
+let content;
+let contentNew;
 const { 0: secret } = config.get('secret');
 
-const userAll = async (ctx) => {
+const contentAll = async (ctx) => {
   try {
-    // users = await userCrud.get();
+    // contents = await contentCrud.get();
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
@@ -24,33 +24,33 @@ const userAll = async (ctx) => {
   }
 };
 
-const userSingle = async (ctx) => {
+const contentSingle = async (ctx) => {
   try {
-    user = await userCrud.single({ _id: ctx.params.id });
+    content = await contentCrud.single({ _id: ctx.params.id });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
     ctx.body = {
-      body: user
+      body: content
     };
   }
 };
 
-const userCreate = async (ctx) => {
+const contentCreate = async (ctx) => {
   try {
-    userNew = await userCrud.create(ctx.request.body);
+    contentNew = await contentCrud.create(ctx.request.body);
   } catch (e) {
     ctx.throw(422, e.message);
   } finally {
     ctx.body = {
-      body: userNew
+      body: contentNew
     };
   }
 };
 
-const userUpdate = async (ctx) => {
+const contentUpdate = async (ctx) => {
   try {
-    user = await userCrud.put({
+    content = await contentCrud.put({
       params: {
         _id: ctx.params.id
       },
@@ -60,58 +60,58 @@ const userUpdate = async (ctx) => {
     ctx.throw(422, e.message);
   } finally {
     ctx.body = {
-      body: user
+      body: content
     };
   }
 };
 
-const userDelete = async (ctx) => {
+const contentDelete = async (ctx) => {
   try {
-    user = await userCrud.delete({ _id: ctx.params.id });
+    content = await contentCrud.delete({ _id: ctx.params.id });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
     ctx.body = {
-      body: user
+      body: content
     };
   }
 };
 
-const userLocal = async (ctx) => {
+const contentLocal = async (ctx) => {
   const {
-    username,
+    contentname,
     password,
     email,
     signup
   } = ctx.request.body;
-  user = await userCrud.single({
+  content = await contentCrud.single({
     $or: [{
-      username
+      contentname
     }, {
-      email: username
+      email: contentname
     }]
   });
-  if (signup && !user) {
+  if (signup && !content) {
     try {
-      user = await userCrud.create({
-        username,
+      content = await contentCrud.create({
+        contentname,
         password,
         email
       });
     } catch (e) {
       ctx.throw(422, e.message);
     }
-  } else if (signup && user) {
-    ctx.throw(409, { message: 'Email or username already registered!!' });
-  } else if (!user) {
-    ctx.throw(401, { message: 'No user found' });
-  } else if (user && !compareSync(password, user.password)) {
+  } else if (signup && content) {
+    ctx.throw(409, { message: 'Email or contentname already registered!!' });
+  } else if (!content) {
+    ctx.throw(401, { message: 'No content found' });
+  } else if (content && !compareSync(password, content.password)) {
     ctx.throw(401, { message: 'Password given is wrong' });
   }
   const token = jwtSign({
     data: {
-      uid: user._id,
-      acc_type: user.acc_type
+      uid: content._id,
+      acc_type: content.acc_type
     },
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 21600
@@ -126,10 +126,10 @@ const userLocal = async (ctx) => {
 };
 
 export {
-  userAll,
-  userSingle,
-  userCreate,
-  userUpdate,
-  userDelete,
-  userLocal
+  contentAll,
+  contentSingle,
+  contentCreate,
+  contentUpdate,
+  contentDelete,
+  contentLocal
 };

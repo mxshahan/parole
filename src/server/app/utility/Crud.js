@@ -5,21 +5,31 @@ export default class Crud {
 
   get(options) {
     return new Promise((resolve, reject) => {
-      this.model.find(options).exec().then((result) => {
-        resolve(result);
-      }).catch((e) => {
-        reject(e);
-      });
+      this.model.find(options ? options.qr : {})
+        .select(options ? options.select ? options.select : {} : {}) //eslint-disable-line
+        .populate(options ? options.populate ? options.populate : '' : '') //eslint-disable-line
+        .exec()
+        .then((result) => {
+          resolve(result);
+        })
+        .catch((e) => {
+          reject(e);
+        });
     });
   }
 
   single(options) {
     return new Promise((resolve, reject) => {
-      this.model.findOne(options).exec().then((result) => {
-        resolve(result);
-      }).catch((e) => {
-        reject(e);
-      });
+      this.model.findOne(options ? options.qr : {})
+        .select(options ? options.select ? options.select : {} : {}) //eslint-disable-line
+        .populate(options ? options.populate ? options.populate : '' : '') //eslint-disable-line
+        .exec()
+        .then((result) => {
+          resolve(result);
+        })
+        .catch((e) => {
+          reject(e);
+        });
     });
   }
 
@@ -36,7 +46,7 @@ export default class Crud {
   }
 
   async delete(options) {
-    const record = await this.single(options);
+    const record = await this.single(options.params);
     return new Promise((resolve, reject) => {
       record.remove().then((result) => {
         resolve(result);
