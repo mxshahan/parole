@@ -1,13 +1,11 @@
 import { compareSync } from 'bcryptjs';
-import { sign as jwtSign } from 'jsonwebtoken';
-import config from 'config';
-import { userCrud } from './user.model';
 import { generateJwt } from '@utl';
+import { userCrud } from './user.model';
 
 let user;
 let VerifyUser;
 let userNew;
-const { 0: secret } = config.get('secret');
+// const { 0: secret } = config.get('secret');
 let token;
 
 const userAll = async (ctx) => {
@@ -27,23 +25,36 @@ const userAll = async (ctx) => {
 };
 
 const userSingle = async (ctx) => {
-  console.log('hey')
-  // try {
-  //   user = await userCrud.single({ 
-  //     qr: { _id: ctx.params.id }
-  //   });
-  // } catch (e) {
-  //   ctx.throw(404, e.message);
-  // } finally {
-  //   ctx.body = {
-  //     body: user
-  //   };
-  // }
+  try {
+    user = await userCrud.single({
+      qr: { _id: ctx.params.id },
+      select: '-password'
+    });
+  } catch (e) {
+    ctx.throw(404, e.message);
+  } finally {
+    ctx.body = {
+      body: user
+    };
+  }
 };
 
 const myAccount = async (ctx) => {
-  console.log('hey')
-}
+  try {
+    user = await userCrud.single({
+      qr: { _id: ctx.state.user.uid }
+    });
+  } catch (e) {
+    ctx.throw(422, e.message);
+  } finally {
+    ctx.body = {
+      data: {
+        user
+      },
+      message: 'Your Accound Found...'
+    };
+  }
+};
 
 const userCreate = async (ctx) => {
   // console.log(ctx.request.body);
@@ -54,7 +65,7 @@ const userCreate = async (ctx) => {
   } finally {
     token = await generateJwt({
       uid: userNew._id
-    })
+    });
     ctx.body = {
       data: {
         acc_type: userNew.acc_type,
@@ -90,7 +101,6 @@ const userLogin = async (ctx) => {
     }
   }
 };
-  
 
 const userUpdate = async (ctx) => {
   try {
@@ -104,7 +114,7 @@ const userUpdate = async (ctx) => {
     ctx.throw(422, e.message);
   } finally {
     ctx.body = {
-      body: user,
+      data: user,
       message: 'Your account successfully updated'
     };
   }
@@ -112,11 +122,11 @@ const userUpdate = async (ctx) => {
 
 const userDelete = async (ctx) => {
   try {
-    user = await userCrud.delete({ 
+    user = await userCrud.delete({
       params: {
-      qr: { _id: ctx.state.user.uid }
-    }, 
-  });
+        qr: { _id: ctx.state.user.uid }
+      }
+    });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
@@ -125,8 +135,6 @@ const userDelete = async (ctx) => {
     };
   }
 };
-
-
 
 export {
   userAll,

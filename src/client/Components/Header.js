@@ -4,6 +4,10 @@ import { Link, NavLink } from 'react-router-dom'
 const Header = () => (
   // start-Header
   <div className="header">
+    <div className="auth">
+      <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
+    </div>
     {/* start-Logo */}
     <div className="logo">
       <Link to="/"><img src="/images/logo.png" title="logo" /></Link>

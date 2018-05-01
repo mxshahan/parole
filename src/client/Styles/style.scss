@@ -31,6 +31,20 @@ body{
 .header {
 	margin-bottom: 8px;
 }
+.header .auth{
+	display: block;
+	width: 100%;
+	text-align: right;
+}
+
+.header .auth a{
+	padding: 5px 10px;
+	display: inline-block;
+	background: rgb(30, 93, 173);
+	margin: 5px 0px 5px 10px;
+	color: #fff;
+}
+
 .logo{
 	float:left;
 	padding: 8px 6px 0px 15px;
