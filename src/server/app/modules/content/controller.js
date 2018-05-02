@@ -2,31 +2,64 @@ import { compareSync } from 'bcryptjs';
 import { sign as jwtSign } from 'jsonwebtoken';
 import config from 'config';
 import { contentCrud } from './content.model';
+import { userCrud } from '../user/user.model';
 
 
 let content;
 let contentNew;
+let user;
+let isMatched;
 const { 0: secret } = config.get('secret');
 
 const contentAll = async (ctx) => {
   try {
-    // contents = await contentCrud.get();
+    content = await contentCrud.get();
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
     ctx.body = {
       body: {
-        name: 'Shahan',
-        age: 24,
-        color: 'Brown'
+        content
       }
+    };
+  }
+};
+
+const myContent = async (ctx) => {
+  console.log(ctx.state.user.uid);
+  try {
+    content = await userCrud.single({
+      qr: { _id: ctx.state.user.uid },
+      select: 'contents',
+      populate: 'contents'
+    });
+    console.log(content);
+  } catch (e) {
+    ctx.throw(404, e.message);
+  } finally {
+    ctx.body = {
+      body: content
+    };
+  }
+};
+
+const userContent = async (ctx) => {
+  try {
+    content = await contentCrud.single({ _id: ctx.params.id });
+  } catch (e) {
+    ctx.throw(404, e.message);
+  } finally {
+    ctx.body = {
+      body: content
     };
   }
 };
 
 const contentSingle = async (ctx) => {
   try {
-    content = await contentCrud.single({ _id: ctx.params.id });
+    content = await contentCrud.single({
+      qr: { _id: ctx.params.id }
+    });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
@@ -42,38 +75,85 @@ const contentCreate = async (ctx) => {
   } catch (e) {
     ctx.throw(422, e.message);
   } finally {
-    ctx.body = {
-      body: contentNew
-    };
+    try {
+      user = await userCrud.single({
+        qr: { _id: ctx.state.user.uid }
+      });
+    } catch (e) {
+      ctx.throw(422, e.message);
+    } finally {
+      user.contents.push(contentNew._id);
+      user.save();
+      ctx.body = {
+        body: contentNew,
+        message: 'Post is successful'
+      };
+    }
   }
 };
 
 const contentUpdate = async (ctx) => {
   try {
-    content = await contentCrud.put({
-      params: {
-        _id: ctx.params.id
-      },
-      body: ctx.request.body
+    user = await userCrud.single({
+      qr: { _id: ctx.state.user.uid }
     });
+    isMatched = user.contents.indexOf(ctx.params.id);
   } catch (e) {
     ctx.throw(422, e.message);
   } finally {
-    ctx.body = {
-      body: content
-    };
+    if (isMatched !== -1) {
+      try {
+        content = await contentCrud.put({
+          params: {
+            qr: { _id: ctx.params.id }
+          },
+          body: ctx.request.body
+        });
+      } catch (e) {
+        ctx.throw(422, e.message);
+      } finally {
+        ctx.body = {
+          body: content,
+          message: 'Post Updated..'
+        };
+      }
+    } else {
+      ctx.body = {
+        message: 'Sorry you don\'t have right to edit this'
+      };
+    }
   }
 };
 
 const contentDelete = async (ctx) => {
   try {
-    content = await contentCrud.delete({ _id: ctx.params.id });
+    user = await userCrud.single({
+      qr: { _id: ctx.state.user.uid }
+    });
+    isMatched = user.contents.indexOf(ctx.params.id);
   } catch (e) {
-    ctx.throw(404, e.message);
+    ctx.throw(422, e.message);
   } finally {
-    ctx.body = {
-      body: content
-    };
+    if (isMatched !== -1) {
+      try {
+        content = await contentCrud.delete({
+          params: {
+            qr: { _id: ctx.params.id }
+          }
+        });
+      } catch (e) {
+        ctx.throw(422, e.message);
+      } finally {
+        ctx.body = {
+          body: content,
+          message: 'Deleted'
+        };
+      }
+    } else {
+      ctx.body = {
+        message: 'Sorry you don\'t have right to delete this'
+      };
+    }
   }
 };
 
@@ -131,5 +211,7 @@ export {
   contentCreate,
   contentUpdate,
   contentDelete,
-  contentLocal
+  contentLocal,
+  myContent,
+  userContent
 };

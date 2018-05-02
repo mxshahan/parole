@@ -42,15 +42,14 @@ const userSingle = async (ctx) => {
 const myAccount = async (ctx) => {
   try {
     user = await userCrud.single({
-      qr: { _id: ctx.state.user.uid }
+      qr: { _id: ctx.state.user.uid },
+      populate: 'contents'
     });
   } catch (e) {
     ctx.throw(422, e.message);
   } finally {
     ctx.body = {
-      data: {
-        user
-      },
+      user,
       message: 'Your Accound Found...'
     };
   }
@@ -67,10 +66,8 @@ const userCreate = async (ctx) => {
       uid: userNew._id
     });
     ctx.body = {
-      data: {
-        acc_type: userNew.acc_type,
-        token
-      },
+      acc_type: userNew.acc_type,
+      token,
       message: 'SignUp Successfull...'
     };
   }
@@ -92,10 +89,8 @@ const userLogin = async (ctx) => {
         uid: user._id
       });
       ctx.body = {
-        data: {
-          acc_type: user.acc_type,
-          token
-        },
+        acc_type: user.acc_type,
+        token,
         message: 'Login Successfull...'
       };
     }
@@ -114,7 +109,7 @@ const userUpdate = async (ctx) => {
     ctx.throw(422, e.message);
   } finally {
     ctx.body = {
-      data: user,
+      user,
       message: 'Your account successfully updated'
     };
   }
