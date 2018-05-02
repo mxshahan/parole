@@ -38,7 +38,8 @@ const userSingle = async (ctx) => {
 const myAccount = async (ctx) => {
   try {
     user = await userCrud.single({
-      qr: { _id: ctx.state.user.uid }
+      qr: { _id: ctx.state.user.uid },
+      populate: 'contents'
     });
   } catch (e) {
     ctx.throw(422, e.message);
