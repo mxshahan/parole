@@ -34,8 +34,11 @@ function baseConfig(app) {
 
   cModules(app);
   // app.use(cMiddleware());
-  app.use(historyApiFallback());
-  app.use(mount(serve(config.get('paths.dist.server'))));
+
+  app.use(convert.compose(
+    historyApiFallback(),
+    mount(serve(config.get('paths.dist.server')))
+  ));
 }
 
 export default baseConfig;

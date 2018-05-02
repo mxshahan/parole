@@ -15,11 +15,7 @@ const userAll = async (ctx) => {
     ctx.throw(404, e.message);
   } finally {
     ctx.body = {
-      body: {
-        name: 'Shahan',
-        age: 24,
-        color: 'Brown'
-      }
+
     };
   }
 };
@@ -34,7 +30,7 @@ const userSingle = async (ctx) => {
     ctx.throw(404, e.message);
   } finally {
     ctx.body = {
-      body: user
+      user
     };
   }
 };
@@ -48,9 +44,7 @@ const myAccount = async (ctx) => {
     ctx.throw(422, e.message);
   } finally {
     ctx.body = {
-      data: {
-        user
-      },
+      user,
       message: 'Your Accound Found...'
     };
   }
@@ -67,10 +61,8 @@ const userCreate = async (ctx) => {
       uid: userNew._id
     });
     ctx.body = {
-      data: {
-        acc_type: userNew.acc_type,
-        token
-      },
+      acc_type: userNew.acc_type,
+      token,
       message: 'SignUp Successfull...'
     };
   }
@@ -92,10 +84,8 @@ const userLogin = async (ctx) => {
         uid: user._id
       });
       ctx.body = {
-        data: {
-          acc_type: user.acc_type,
-          token
-        },
+        acc_type: user.acc_type,
+        token,
         message: 'Login Successfull...'
       };
     }
@@ -114,7 +104,7 @@ const userUpdate = async (ctx) => {
     ctx.throw(422, e.message);
   } finally {
     ctx.body = {
-      data: user,
+      user,
       message: 'Your account successfully updated'
     };
   }

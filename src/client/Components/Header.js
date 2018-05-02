@@ -1,13 +1,24 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-
-const Header = () => (
+import { connect } from 'react-redux'
+import { LogoutUser } from '../Actions/auth';
+const Header = ({isAuthenticated, LogoutUser, ...props}) => (
   // start-Header
   <div className="header">
+    {isAuthenticated ?
+    <div className="auth">
+      <Link to="/dashboard">Dashboard</Link>
+      <Link to="#" onClick={() => {
+        localStorage.clear();
+        LogoutUser();
+      }}>Logout</Link>
+    </div>
+    :
     <div className="auth">
       <Link to="/login">Login</Link>
       <Link to="/register">Register</Link>
-    </div>
+    </div> 
+    }
     {/* start-Logo */}
     <div className="logo">
       <Link to="/"><img src="/images/logo.png" title="logo" /></Link>
@@ -16,10 +27,10 @@ const Header = () => (
     {/* start-top-nav */}
     <div className="top-nav">
       <ul>
-        <li><NavLink to="/">Home</NavLink><p>My Frontpage</p></li>
-        <li><NavLink to="/category">Categories</NavLink><p>Be Ur Self</p></li>
-        <li><NavLink to="/about">About</NavLink><p>About this blog</p></li>
-        <li><NavLink to="/contact">Contact</NavLink><p>Leave Messages</p></li>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/category">Categories</NavLink></li>
+        <li><NavLink to="/about">About</NavLink></li>
+        <li><NavLink to="/contact">Contact</NavLink></li>
       </ul>
     </div>
     <div className="clear"> </div>
@@ -27,5 +38,11 @@ const Header = () => (
   </div>
   // End-Header
 )
+const mapStateToProps = (state) => ({
+  isAuthenticated: !!state.auth.token
+})
 
-export default Header
+const mapDispatchToProps = (dispatch) => ({
+  LogoutUser: () => dispatch(LogoutUser())
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
