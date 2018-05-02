@@ -1,59 +1,51 @@
 import { isAuthenticated } from '@mid';
 import {
-  userSingle,
-  userCreate,
-  userUpdate,
-  userDelete,
-  userLogin,
-  myAccount
+  CategoryAll,
+  CategorySingle,
+  CategoryCreate,
+  CategoryUpdate,
+  CategoryDelete
 } from './controller';
 
-export const baseUrl = '/api/user';
+export const baseUrl = '/api/category';
 
 export const routes = [
   {
     method: 'GET',
-    route: '/me',
+    route: '/',
     handlers: [
-      isAuthenticated,
-      myAccount
+      CategoryAll
     ]
   },
   {
     method: 'GET',
     route: '/:id',
     handlers: [
-      userSingle
+      CategorySingle
     ]
   },
   {
     method: 'PUT',
-    route: '/',
+    route: '/:id',
     handlers: [
       isAuthenticated,
-      userUpdate
+      CategoryUpdate
     ]
   },
   {
     method: 'DELETE',
+    route: '/:id',
+    handlers: [
+      isAuthenticated,
+      CategoryDelete
+    ]
+  },
+  {
+    method: 'POST',
     route: '/',
     handlers: [
       isAuthenticated,
-      userDelete
-    ]
-  },
-  {
-    method: 'POST',
-    route: '/create',
-    handlers: [
-      userCreate
-    ]
-  },
-  {
-    method: 'POST',
-    route: '/login',
-    handlers: [
-      userLogin
+      CategoryCreate
     ]
   }
 ];

@@ -9,11 +9,20 @@ const contentSchema = new mongoose.Schema({
     required: true
   },
   category: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'CategoryModel',
     required: true
   },
-  parmalink: {
+  description: {
     type: String
+  },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'userModel'
+  },
+  parmalink: {
+    type: String,
+    required: true
   }
 });
 

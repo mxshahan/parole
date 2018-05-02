@@ -1,6 +1,3 @@
-import { compareSync } from 'bcryptjs';
-import { sign as jwtSign } from 'jsonwebtoken';
-import config from 'config';
 import { contentCrud } from './content.model';
 import { userCrud } from '../user/user.model';
 
@@ -9,69 +6,92 @@ let content;
 let contentNew;
 let user;
 let isMatched;
-const { 0: secret } = config.get('secret');
 
-const contentAll = async (ctx) => {
+const filterContent = async (ctx) => {
   try {
-    content = await contentCrud.get();
+    content = await contentCrud.get({
+      qr: { category: ctx.params.filter },
+      populate: 'author category'
+    });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = {
-      body: {
-        content
-      }
-    };
+    ctx.body = content;
+  }
+};
+
+const contentCategory = async (ctx) => {
+  try {
+    content = await contentCrud.get({
+      select: 'category -_id',
+      populate: 'category'
+    });
+  } catch (e) {
+    ctx.throw(404, e.message);
+  } finally {
+    ctx.body = content;
+  }
+};
+
+const contentAll = async (ctx) => {
+  try {
+    content = await contentCrud.get({
+      populate: 'author'
+    });
+  } catch (e) {
+    ctx.throw(404, e.message);
+  } finally {
+    ctx.body = content;
   }
 };
 
 const myContent = async (ctx) => {
-  console.log(ctx.state.user.uid);
   try {
     content = await userCrud.single({
       qr: { _id: ctx.state.user.uid },
-      select: 'contents',
+      select: 'contents -_id',
       populate: 'contents'
     });
-    console.log(content);
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = {
-      body: content
-    };
+    ctx.body = content;
   }
 };
 
 const userContent = async (ctx) => {
   try {
-    content = await contentCrud.single({ _id: ctx.params.id });
+    content = await userCrud.single({
+      qr: { username: ctx.params.user },
+      select: 'contents -_id',
+      populate: 'contents'
+    });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = {
-      body: content
-    };
+    ctx.body = content;
   }
 };
 
 const contentSingle = async (ctx) => {
   try {
     content = await contentCrud.single({
-      qr: { _id: ctx.params.id }
+      qr: { _id: ctx.params.id },
+      populate: 'author'
     });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = {
-      body: content
-    };
+    ctx.body = content;
   }
 };
 
 const contentCreate = async (ctx) => {
+  const contentData = Object.assign({
+    author: ctx.state.user.uid
+  }, ctx.request.body);
   try {
-    contentNew = await contentCrud.create(ctx.request.body);
+    contentNew = await contentCrud.create(contentData);
   } catch (e) {
     ctx.throw(422, e.message);
   } finally {
@@ -157,61 +177,14 @@ const contentDelete = async (ctx) => {
   }
 };
 
-const contentLocal = async (ctx) => {
-  const {
-    contentname,
-    password,
-    email,
-    signup
-  } = ctx.request.body;
-  content = await contentCrud.single({
-    $or: [{
-      contentname
-    }, {
-      email: contentname
-    }]
-  });
-  if (signup && !content) {
-    try {
-      content = await contentCrud.create({
-        contentname,
-        password,
-        email
-      });
-    } catch (e) {
-      ctx.throw(422, e.message);
-    }
-  } else if (signup && content) {
-    ctx.throw(409, { message: 'Email or contentname already registered!!' });
-  } else if (!content) {
-    ctx.throw(401, { message: 'No content found' });
-  } else if (content && !compareSync(password, content.password)) {
-    ctx.throw(401, { message: 'Password given is wrong' });
-  }
-  const token = jwtSign({
-    data: {
-      uid: content._id,
-      acc_type: content.acc_type
-    },
-    iat: Math.floor(Date.now() / 1000),
-    exp: Math.floor(Date.now() / 1000) + 21600
-  }, secret);
-  ctx.session.token = token;
-  ctx.body = {
-    data: {
-      token
-    },
-    message: 'Loggedin successfully'
-  };
-};
-
 export {
   contentAll,
   contentSingle,
   contentCreate,
   contentUpdate,
   contentDelete,
-  contentLocal,
   myContent,
-  userContent
+  userContent,
+  filterContent,
+  contentCategory
 };

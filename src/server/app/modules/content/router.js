@@ -5,14 +5,44 @@ import {
   contentCreate,
   contentUpdate,
   contentDelete,
-  contentLocal,
   myContent,
-  userContent
+  userContent,
+  filterContent,
+  contentCategory
 } from './controller';
 
 export const baseUrl = '/api/content';
 
 export const routes = [
+  {
+    method: 'GET',
+    route: '/category',
+    handlers: [
+      contentCategory
+    ]
+  },
+  {
+    method: 'GET',
+    route: '/category/:filter',
+    handlers: [
+      filterContent
+    ]
+  },
+  {
+    method: 'GET',
+    route: '/user/:user',
+    handlers: [
+      userContent
+    ]
+  },
+  {
+    method: 'GET',
+    route: '/my',
+    handlers: [
+      isAuthenticated,
+      myContent
+    ]
+  },
   {
     method: 'GET',
     route: '/',
@@ -25,21 +55,6 @@ export const routes = [
     route: '/:id',
     handlers: [
       contentSingle
-    ]
-  },
-  {
-    method: 'GET',
-    route: '/mycontent',
-    handlers: [
-      isAuthenticated,
-      myContent
-    ]
-  },
-  {
-    method: 'GET',
-    route: '/usercontent',
-    handlers: [
-      userContent
     ]
   },
   {
@@ -64,13 +79,6 @@ export const routes = [
     handlers: [
       isAuthenticated,
       contentCreate
-    ]
-  },
-  {
-    method: 'POST',
-    route: '/local',
-    handlers: [
-      contentLocal
     ]
   }
 ];

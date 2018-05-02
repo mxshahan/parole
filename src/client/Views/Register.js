@@ -39,6 +39,9 @@ class Register extends React.Component{
       localStorage.setItem('acc_type', res.data.acc_type);
       this.props.createUser(res.data);
       this.props.history.push('/');
+      this.setState({
+        err: null
+      })
     })
     .catch((e) => {
       this.setState({
@@ -49,7 +52,6 @@ class Register extends React.Component{
   }
 
   render() {
-    console.log(-this.state.email, this.state)
     const props = this.props;
     return (
       <section className="Login text-center">
@@ -89,6 +91,12 @@ class Register extends React.Component{
                 <div className="d-flex createAccountBtn">
                   <label>Already have an account <Link to="/login">Login</Link></label>
                 </div>
+                <br/>
+                {this.state.err &&
+                <div className="alert alert-warning">
+                  <p>{this.state.err}</p> 
+                </div>
+                }
               </form>
             </div>
           </Row>

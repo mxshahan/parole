@@ -2,10 +2,12 @@ import Router from 'koa-router';
 
 import { UserRouteProps } from './user';
 import { ContentRouteProps } from './content';
+import { CategoryRouteProps } from './category';
 
 const routerControllPros = [
   UserRouteProps,
-  ContentRouteProps
+  ContentRouteProps,
+  CategoryRouteProps
 ];
 
 let instance;

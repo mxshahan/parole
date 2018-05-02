@@ -9,7 +9,8 @@ import { startLogin } from '../Actions/auth'
 class Login extends React.Component{
   state = {
     email: '',
-    password: ''
+    password: '',
+    err: null
   }
 
   loginHandler = (e) => {
@@ -24,8 +25,14 @@ class Login extends React.Component{
       localStorage.setItem('acc_type', res.data.acc_type);
       this.props.startLogin(res.data);
       this.props.history.push('/');
+      this.setState({
+        err: null
+      })
     })
     .catch((e) => {
+      this.setState({
+        err: 'Login Unsuccessfull'
+      })
       console.log('Error login', e)
     })
   }
@@ -58,6 +65,12 @@ class Login extends React.Component{
                 <div className="d-flex createAccountBtn">
                   <label><Link to="/register">Create an Account</Link></label>
                 </div>
+                <br/>
+                {this.state.err &&
+                <div className="alert alert-warning">
+                  <p>{this.state.err}</p> 
+                </div>
+                }
               </form>
             </div>
           </Row>

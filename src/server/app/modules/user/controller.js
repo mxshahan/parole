@@ -8,17 +8,6 @@ let userNew;
 // const { 0: secret } = config.get('secret');
 let token;
 
-const userAll = async (ctx) => {
-  try {
-    // users = await userCrud.get();
-  } catch (e) {
-    ctx.throw(404, e.message);
-  } finally {
-    ctx.body = {
-
-    };
-  }
-};
 
 const userSingle = async (ctx) => {
   try {
@@ -128,7 +117,6 @@ const userDelete = async (ctx) => {
 };
 
 export {
-  userAll,
   userSingle,
   userCreate,
   userUpdate,

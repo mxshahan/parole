@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-
-const Grid = () => (
+const Grid = ({ content }) => (
   <div className="grid">
-  <h3>Consectetur adipisicing elit</h3>
-  <Link to={"/single/121212"}><img src="/images/g1 copy.png" title="video-name" /></Link>
+  <h3>{content.title ? content.title : 'Untitled'}</h3>
+  <Link to={`/single/${content._id}`}>
+    {content.parmalink ? 
+      <img src={content.parmalink} title={content.title} />
+      :
+      <img src="/images/g1 copy.png" title="video-name" />
+    }
+  </Link>
   <div className="time">
     <span>00:10</span>
   </div>
@@ -28,4 +33,5 @@ const Grid = () => (
 </div>
 )
 
-export default Grid
+
+export default (Grid)
