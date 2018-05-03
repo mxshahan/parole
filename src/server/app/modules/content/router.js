@@ -1,13 +1,16 @@
+import { isAuthenticated } from '@mid';
 import {
   contentAll,
   contentSingle,
   contentCreate,
   contentUpdate,
   contentDelete,
-  contentLocal
+  contentLocal,
+  myContent,
+  userContent
 } from './controller';
 
-export const baseUrl = '/content';
+export const baseUrl = '/api/content';
 
 export const routes = [
   {
@@ -25,9 +28,25 @@ export const routes = [
     ]
   },
   {
+    method: 'GET',
+    route: '/mycontent',
+    handlers: [
+      isAuthenticated,
+      myContent
+    ]
+  },
+  {
+    method: 'GET',
+    route: '/usercontent',
+    handlers: [
+      userContent
+    ]
+  },
+  {
     method: 'PUT',
     route: '/:id',
     handlers: [
+      isAuthenticated,
       contentUpdate
     ]
   },
@@ -35,6 +54,7 @@ export const routes = [
     method: 'DELETE',
     route: '/:id',
     handlers: [
+      isAuthenticated,
       contentDelete
     ]
   },
@@ -42,6 +62,7 @@ export const routes = [
     method: 'POST',
     route: '/',
     handlers: [
+      isAuthenticated,
       contentCreate
     ]
   },

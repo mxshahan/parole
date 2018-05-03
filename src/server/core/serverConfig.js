@@ -15,8 +15,6 @@ function baseConfig(app) {
   app.keys = config.get('secret');
   app.proxy = true;
 
-  app.use(historyApiFallback());
-  app.use(mount(serve(config.get('paths.dist.server'))));
   app.use(convert.compose(
     catchErr,
     cors({
@@ -36,6 +34,8 @@ function baseConfig(app) {
 
   cModules(app);
   // app.use(cMiddleware());
+  app.use(historyApiFallback());
+  app.use(mount(serve(config.get('paths.dist.server'))));
 }
 
 export default baseConfig;

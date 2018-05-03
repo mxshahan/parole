@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import Sidebar from '../Components/Sidebar';
 
 const Single = () => (
 <div className="content">
@@ -141,38 +142,8 @@ const Single = () => (
     </div>
     <div className="clear"> </div>
   </div>
-  <div className="right-content">
-    <div className="popular">
-      <h3>Popular Videos</h3>
-      <p><img src="/images/l1.png" title="likes" /> 10,000</p>
-      <div className="clear"> </div>
-    </div>
-    <div className="grid1">
-      <h3>Consectetur adipisicing elit</h3>
-      <Link to="#"><img src="/images/g7.jpg" title="video-name" /></Link>
-      <div className="time1">
-        <span>2:50</span>
-      </div>
-          
-      <div className="grid-info">
-        <div className="video-share">
-          <ul>
-            <li><Link to="#"><img src="/images/likes.png" title="links" /></Link></li>
-            <li><Link to="#"><img src="/images/link.png" title="Link" /></Link></li>
-            <li><Link to="#"><img src="/images/views.png" title="Views" /></Link></li>
-          </ul>
-        </div>
-        <div className="video-watch">
-          <Link to="#">Watch Now</Link>
-        </div>
-        <div className="clear"> </div>
-        <div className="lables">
-          <p>Labels:<Link to="#">Lorem</Link></p>
-        </div>
-      </div>
-    </div>
-        <div className="clear"> </div>
-  </div>
+  <Sidebar/>
+
   <div className="clear"> </div>
 </div>
 )

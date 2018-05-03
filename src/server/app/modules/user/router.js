@@ -1,3 +1,4 @@
+import { isAuthenticated } from '@mid';
 import {
   userAll,
   userSingle,
@@ -7,7 +8,6 @@ import {
   userLogin,
   myAccount
 } from './controller';
-import { isAuthenticated } from '@mid';
 
 export const baseUrl = '/api/user';
 
@@ -21,8 +21,9 @@ export const routes = [
   },
   {
     method: 'GET',
-    route: '/',
+    route: '/me',
     handlers: [
+      isAuthenticated,
       myAccount
     ]
   },

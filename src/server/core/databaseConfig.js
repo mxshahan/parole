@@ -11,7 +11,7 @@ export default function connectDatabase() {
   //   dbUri = `mongodb://${config.get('db.host')}:${config.get('db.options.port')}/${config.get('db.dbName')}`;
   // }
 
-  dbUri = 'mongodb://root:12345@ds263089.mlab.com:63089/parole';
+  dbUri = 'mongodb://hello:12345@ds163769.mlab.com:63769/parole';
 
   return new Promise((resolve, reject) => {
     mongoose.Promise = global.Promise;

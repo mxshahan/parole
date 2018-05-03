@@ -1,13 +1,12 @@
 import { compareSync } from 'bcryptjs';
-import { sign as jwtSign } from 'jsonwebtoken';
-import config from 'config';
-import { userCrud } from './user.model';
 import { generateJwt } from '@utl';
+import { userCrud } from './user.model';
 
 let user;
 let VerifyUser;
 let userNew;
-const { 0: secret } = config.get('secret');
+let isMismatch;
+// const { 0: secret } = config.get('secret');
 let token;
 
 const userAll = async (ctx) => {
@@ -27,23 +26,35 @@ const userAll = async (ctx) => {
 };
 
 const userSingle = async (ctx) => {
-  console.log('hey')
-  // try {
-  //   user = await userCrud.single({ 
-  //     qr: { _id: ctx.params.id }
-  //   });
-  // } catch (e) {
-  //   ctx.throw(404, e.message);
-  // } finally {
-  //   ctx.body = {
-  //     body: user
-  //   };
-  // }
+  try {
+    user = await userCrud.single({
+      qr: { _id: ctx.params.id },
+      select: '-password'
+    });
+  } catch (e) {
+    ctx.throw(404, e.message);
+  } finally {
+    ctx.body = {
+      body: user
+    };
+  }
 };
 
 const myAccount = async (ctx) => {
-  console.log('hey')
-}
+  try {
+    user = await userCrud.single({
+      qr: { _id: ctx.state.user.uid },
+      populate: 'contents'
+    });
+  } catch (e) {
+    ctx.throw(422, e.message);
+  } finally {
+    ctx.body = {
+      user,
+      message: 'Your Accound Found...'
+    };
+  }
+};
 
 const userCreate = async (ctx) => {
   // console.log(ctx.request.body);
@@ -54,21 +65,25 @@ const userCreate = async (ctx) => {
   } finally {
     token = await generateJwt({
       uid: userNew._id
-    })
+    });
     ctx.body = {
-      data: {
-        acc_type: userNew.acc_type,
-        token
-      },
+      acc_type: userNew.acc_type,
+      token,
       message: 'SignUp Successfull...'
     };
   }
 };
 
 const userLogin = async (ctx) => {
-  user = await userCrud.single({
-    qr: { email: ctx.request.body.email }
-  });
+  if (ctx.request.body.username == null) {
+    user = await userCrud.single({
+      qr: { email: ctx.request.body.email }
+    });
+  } else {
+    user = await userCrud.single({
+      qr: { username: ctx.request.body.username }
+    });
+  }
   try {
     if (user) {
       VerifyUser = await compareSync(ctx.request.body.password, user.password);
@@ -81,16 +96,13 @@ const userLogin = async (ctx) => {
         uid: user._id
       });
       ctx.body = {
-        data: {
-          acc_type: user.acc_type,
-          token
-        },
+        acc_type: user.acc_type,
+        token,
         message: 'Login Successfull...'
       };
     }
   }
 };
-  
 
 const userUpdate = async (ctx) => {
   try {
@@ -104,7 +116,7 @@ const userUpdate = async (ctx) => {
     ctx.throw(422, e.message);
   } finally {
     ctx.body = {
-      body: user,
+      user,
       message: 'Your account successfully updated'
     };
   }
@@ -112,11 +124,11 @@ const userUpdate = async (ctx) => {
 
 const userDelete = async (ctx) => {
   try {
-    user = await userCrud.delete({ 
+    user = await userCrud.delete({
       params: {
-      qr: { _id: ctx.state.user.uid }
-    }, 
-  });
+        qr: { _id: ctx.state.user.uid }
+      }
+    });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
@@ -125,8 +137,6 @@ const userDelete = async (ctx) => {
     };
   }
 };
-
-
 
 export {
   userAll,
