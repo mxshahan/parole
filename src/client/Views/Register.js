@@ -59,7 +59,7 @@ class Register extends React.Component{
           <Row>
             <div id="regLoginForm" className="col-sm-5">
               <form className="form-group" onSubmit={this.registerHandler}>
-                <div className="closeBtnLogin" onClick={() => props.history.goBack()}><i className="fa fa-times-circle fa-2x"></i></div>
+                <div className="closeBtnLogin" onClick={() => props.history.push('/')}><i className="fa fa-times-circle fa-2x"></i></div>
                 <h2>Sign Up</h2>
                 <input type="text" placeholder="First Name" className="" 
                 onChange={(e) => this.setState({

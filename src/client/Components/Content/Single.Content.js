@@ -4,10 +4,6 @@ import Social from './Single.Social';
 
 const SingleContent = ({ single }) => (
 <section>
-  {
-console.log(single)
-    
-  }
   <div className="title">
     <h3>{single.title ? single.title : 'Untitled'}</h3>
     <ul>

@@ -23,6 +23,9 @@ const contentSchema = new mongoose.Schema({
   parmalink: {
     type: String,
     required: true
+  },
+  thumbnail: {
+    type: String
   }
 });
 

@@ -1,17 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import{Route, Redirect} from 'react-router-dom';
+import DashboardSidebar from '../Components/Dashboard/DashboardSidebar';
 
 const PrivateRoute = ({isAuthenticated, component: Component, ...rest}) => (
-  <Route {...rest} component={(props)=> (
-        isAuthenticated ? (
+    isAuthenticated ? (
+        <Route {...rest} component={(props)=> (
             <div>
-                <Component {...props}/>
+                <div className="categories-list">
+                    <DashboardSidebar/>
+                    <Component {...props}/>
+                    <div className="clear"> </div>
+                </div>
             </div>
-        ) : (
-            <Redirect to="/login"/>
-        )
-  )}/>
+        )}/>
+    ) 
+    :<Redirect to="/login"/>
 )
 
 const mapStateToProps = (state) => ({

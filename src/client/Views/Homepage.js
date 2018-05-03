@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import Grid from '../Components/Grids/Grid';
 import Sidebar from '../Components/Sidebar';
@@ -8,7 +9,8 @@ import { setContent } from '../Actions/content';
 
 class Homepage extends React.Component{
   state = {
-    content: false
+    content: false,
+    data: ''
   }
 
   componentDidMount() {
@@ -46,19 +48,19 @@ class Homepage extends React.Component{
             </div>
           </div>
         : 'Loading...'}
-          <div className="clear"> </div>
+          {/* <div className="clear"> </div>
             <ul className="dc_pagination dc_paginationA dc_paginationA03">
               <li><a href="#" className="first">First</a></li>
               <li><a href="#" className="previous">Previous</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#" className="current">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              <li><NavLink to="/?p=1" activeClassName="current">1</NavLink></li>
+              <li><NavLink to="/?p=2" activeClassName="current">2</NavLink></li>
+              <li><NavLink to="" activeClassName="current">3</NavLink></li>
+              <li><NavLink to="" activeClassName="current">4</NavLink></li>
               <li><a href="#" className="next">Next</a></li>
               <li><a href="#" className="last">Last</a></li>
             </ul>
-          <div className="clear"> </div>
+          */}
+          <div className="clear"> </div> 
         </div>
       <Sidebar/>
       <div className="clear"> </div>  

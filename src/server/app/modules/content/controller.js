@@ -55,7 +55,7 @@ const myContent = async (ctx) => {
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = content;
+    ctx.body = content.contents;
   }
 };
 
@@ -87,6 +87,7 @@ const contentSingle = async (ctx) => {
 };
 
 const contentCreate = async (ctx) => {
+  console.log(ctx.request.body);
   const contentData = Object.assign({
     author: ctx.state.user.uid
   }, ctx.request.body);

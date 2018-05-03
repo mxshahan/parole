@@ -13,6 +13,16 @@ export const setCatContent = (data) => ({
     data
 });
 
+export const myContent = (data) => ({
+    type: 'MY_CONTENT',
+    data
+});
+
+// export const setCatContent = (data) => ({
+//     type: 'SET_PAGE_CONTENT',
+//     data
+// });
+
 export const getContent = () => ({
     type: 'GET_CONTENT'
 })

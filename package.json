@@ -37,6 +37,7 @@
     "bcryptjs": "^2.4.3",
     "config": "^1.29.1",
     "cross-env": "^5.1.4",
+    "firebase": "^4.13.1",
     "fs-promise": "^2.0.3",
     "glob": "^7.1.2",
     "grant": "^3.8.1",

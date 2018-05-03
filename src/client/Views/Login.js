@@ -20,14 +20,11 @@ class Login extends React.Component{
       password: this.state.password
     })
     .then((res) => {
-      console.log(res.data)
+      // console.log(res.data)
       localStorage.setItem('auth', res.data.token);
       localStorage.setItem('acc_type', res.data.acc_type);
       this.props.startLogin(res.data);
-      this.props.history.push('/');
-      this.setState({
-        err: null
-      })
+      this.props.history.push('/dashboard');
     })
     .catch((e) => {
       this.setState({
@@ -47,7 +44,7 @@ class Login extends React.Component{
               <form className="form-group" onSubmit={this.loginHandler} >
                 <div 
                   className="closeBtnLogin" 
-                  onClick={() => props.history.goBack()}><i className="fa fa-times-circle fa-2x"></i></div>
+                  onClick={() => props.history.push('/')}><i className="fa fa-times-circle fa-2x"></i></div>
                 <h2>Login</h2>
                 <input required="required" type="email" placeholder="Email" className="" onChange={(e) => this.setState({
                   email: e.target.value

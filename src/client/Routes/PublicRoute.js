@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import{ Route, Redirect } from 'react-router-dom';
 
 const PublicRoute = ({isAuthenticated, component: Component, ...rest}) => (
+  isAuthenticated ? 
+    <Redirect to={'/dashboard'}/>
+  :
   <Route {...rest} component={(props)=> (
-        isAuthenticated ? (
-          <Redirect to="/dashboard"/>
-        ) : (          
-          <div>
-              <Component {...props}/>
-          </div>
-        )
+      <div>
+          <Component {...props}/>
+      </div>
   )}/>
 )
 

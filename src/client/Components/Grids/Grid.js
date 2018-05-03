@@ -6,7 +6,8 @@ const Grid = ({ content }) => (
   <h3>{content.title ? content.title : 'Untitled'}</h3>
   <Link to={`/single/${content._id}`}>
     {content.parmalink ? 
-      <img src={content.parmalink} title={content.title} />
+      // console.log(`/${content.parmalink}`)
+      <img src={content.parmalink} title={content.title} /> 
       :
       <img src="/images/g1 copy.png" title="video-name" />
     }

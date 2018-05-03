@@ -175,9 +175,14 @@ body{
 .lables p a:hover{
 	color:#555;
 }
-.grid:nth-child(2),.grid:nth-child(5),.grid:nth-child(8){
-	margin:0px 14.5px;
+// .grid:nth-child(2),.grid:nth-child(5),.grid:nth-child(8){
+// 	margin:0px 14.5px;
+// }
+
+.grid{
+	margin:15px;
 }
+
 /*-----right-content-----*/
 .right-content{
 	float:right;
@@ -876,6 +881,18 @@ ul.dc_paginationA03 li a:hover, ul.dc_paginationA03 li a.current {
 		font-size:0.9em;
 	}
 }
+@media screen and (max-width:1400px) {
+	.grid{
+		margin: 10px;
+	}
+}
+
+@media screen and (max-width:960px) {
+	.grid{
+		margin: 10px;
+	}
+}
+
 @media screen and (max-width:640px) {
 	.wrap{
 		width:95%;
@@ -883,9 +900,14 @@ ul.dc_paginationA03 li a:hover, ul.dc_paginationA03 li a.current {
 	.top-nav ul li:nth-child(2),.lables{
 		display:none;
 	}
-	.grid:nth-child(2), .grid:nth-child(5), .grid:nth-child(8) {
-		margin: 0px 10px;
+	// .grid:nth-child(2), .grid:nth-child(5), .grid:nth-child(8) {
+	// 	margin: 0px 10px;
+	// }
+
+	.grid{
+		margin: 0px 5px;
 	}
+
 	.time {
 		bottom: 54px;
 	}

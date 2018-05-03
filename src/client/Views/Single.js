@@ -13,32 +13,25 @@ class Single extends React.Component{
   }
 
   componentDidMount(){
-    if (this.props.blogAll) {
-      this.props.setSingleRedux();
-      this.setState({
-          single: true
-      })
-      console.log('pre')
-    } else {
-      console.log('post')
-      Axios.get(`/api/content/${this.props.match.params.id}`).then((res) => {
-          // console.log(res);
-          this.props.setOneContent(res.data);
-          this.setState({
-              single: true
-          })
-      }).catch((e) => {
-          this.setState({
-              single: false
-          })
-          console.log('Error getting message', e);
-          throw e;
-      })
-    }
+    console.log('post')
+    Axios.get(`/api/content/${this.props.match.params.id}`).then((res) => {
+        // console.log(res);
+        this.props.setOneContent(res.data);
+        this.setState({
+            single: true
+        })
+    }).catch((e) => {
+        this.setState({
+            single: false
+        })
+        console.log('Error getting message', e);
+        throw e;
+    })
   }
 
 
 render(){
+  console.log(this.props.single)
   return(
     <div className="content">
       <div className="inner-page">
