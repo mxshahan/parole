@@ -24,7 +24,10 @@ export default (state = {}, action) => {
             // state.mycontent = action.data;
             return state = {
                 mycontent: action.data,
-                ...state
+                ...state.all,
+                ...state.category,
+                ...state.cat_content,
+                ...state.single
             }
         case 'SINGLE_CONTENT':
             return state = {

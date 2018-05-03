@@ -1,0 +1,1 @@
+{"version":3,"file":"main.d77ba6c15a8623cc2dd0.hot-update.js","sources":["webpack:///src/client/Views/Dashboard.js"],"sourcesContent":["import React from 'react';\nconst Dashboard = () => (\n<div className=\"content\">\n  \n</div>\n)\n\nexport default Dashboard;"],"mappings":";;;;;;;;;;;;;;;;AAAA;AACA;;;;;AAAA;AACA;AAKA;;;;A","sourceRoot":""}

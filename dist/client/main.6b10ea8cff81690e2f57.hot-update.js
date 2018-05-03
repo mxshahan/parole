@@ -1,0 +1,117 @@
+webpackHotUpdate("main",{
+
+/***/ "./src/client/Components/Header.js":
+/*!*****************************************!*\
+  !*** ./src/client/Components/Header.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const Header = () =>
+// start-Header
+_react2.default.createElement(
+  'div',
+  { className: 'header' },
+  _react2.default.createElement(
+    'div',
+    { className: 'logo' },
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      { to: 'index.html' },
+      _react2.default.createElement('img', { src: 'images/logo.png', title: 'logo' })
+    )
+  ),
+  _react2.default.createElement(
+    'div',
+    { className: 'top-nav' },
+    _react2.default.createElement(
+      'ul',
+      null,
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.NavLink,
+          { to: '/' },
+          'Home'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'My Frontpage'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.NavLink,
+          { to: '/category' },
+          'Categories'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Be Ur Self'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.NavLink,
+          { to: '/about' },
+          'About'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'About this blog'
+        )
+      ),
+      _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.NavLink,
+          { to: '/contact' },
+          'Contact'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Leave Messages'
+        )
+      )
+    )
+  ),
+  _react2.default.createElement(
+    'div',
+    { className: 'clear' },
+    ' '
+  )
+)
+// End-Header
+;
+
+exports.default = Header;
+
+/***/ })
+
+})
+//# sourceMappingURL=main.6b10ea8cff81690e2f57.hot-update.js.map

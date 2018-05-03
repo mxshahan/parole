@@ -59,6 +59,7 @@ class AddNewContent extends React.Component{
         }
     }).then((res) => {
         console.log(res.data)
+        this.props.history.push('/dashboard/mycontent')
     }).catch((e) => {
         console.log(e)
     })
