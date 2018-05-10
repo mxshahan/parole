@@ -21,7 +21,7 @@ const Header = ({isAuthenticated, LogoutUser, ...props}) => (
     }
     {/* start-Logo */}
     <div className="logo">
-      <Link to="/"><img src="/images/logo.png" title="logo" /></Link>
+      <Link to="/"><img src="/public/images/logo.png" title="logo" /></Link>
     </div>
     {/* End-Logo */}
     {/* start-top-nav */}

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const DashboardSidebar = () => (
     <div className="content-sidebar">
-      <h4><img src="/images/fi.png" alt="" />Member Area</h4>
+      <h4><img src="/public/images/fi.png" alt="" />Member Area</h4>
       <ul> 
         <li><NavLink exact={true} activeClassName="active" to="/dashboard">Dashboard</NavLink></li>
         <li><NavLink activeClassName="active"  to="/dashboard/post">Add New Content</NavLink></li>

@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 const SRC = path.resolve(__dirname, 'src');
 const DST = path.join(__dirname, 'dist');
-// const STATIC = path.resolve(__dirname, 'static');
+const STATIC = path.resolve(__dirname, 'static');
 
 module.exports = {
   mode: 'production',
@@ -34,7 +34,7 @@ module.exports = {
   ],
   devtool: 'cheap-module-source-map',
   devServer: {
-    contentBase: DST,
+    contentBase: STATIC,
     historyApiFallback: true,
     port: 8081
   }

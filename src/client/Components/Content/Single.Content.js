@@ -11,7 +11,7 @@ const SingleContent = ({ single }) => (
       <li><Link to="#">{single.author ? single.author.username : 'Admin'}</Link></li>
       <li>
         <Link to="#">
-          <img src="/images/sub.png" title="subscribe" />subscribe
+          <img src="/public/images/sub.png" title="subscribe" />subscribe
         </Link>
       </li>
     </ul>
@@ -21,7 +21,7 @@ const SingleContent = ({ single }) => (
       {single.parmalink ?
         <img src={single.parmalink} title={single.title} />
       :
-        <img src="/images/b11.png" title="videoname" />
+        <img src="/public/images/b11.png" title="videoname" />
       }
       <span>10:00</span>
     </Link>

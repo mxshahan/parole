@@ -18,7 +18,7 @@ const Grid = ({ content, ...props }) => (
         // console.log(`/${content.parmalink}`)
         <img src={content.parmalink} title={content.title} /> 
         :
-        <img src="/images/g1 copy.png" title="video-name" />
+        <img src="/public/images/g1 copy.png" title="video-name" />
       }
     </div>
   </Link>
@@ -28,9 +28,9 @@ const Grid = ({ content, ...props }) => (
   <div className="grid-info">
     <div className="video-share">
       <ul>
-        <li><Link to="#"><img src="/images/likes.png" title="links" /></Link></li>
-        <li><Link to="#"><img src="/images/link.png" title="Link" /></Link></li>
-        <li><Link to="#"><img src="/images/views.png" title="Views" /></Link></li>
+        <li><Link to="#"><img src="/public/images/likes.png" title="links" /></Link></li>
+        <li><Link to="#"><img src="/public/images/link.png" title="Link" /></Link></li>
+        <li><Link to="#"><img src="/public/images/views.png" title="Views" /></Link></li>
       </ul>
     </div>
     <div className="video-watch">

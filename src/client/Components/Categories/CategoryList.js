@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const CategoryList = ({ category, ...props }) => (
   <div className="categories-list">
     <div className="content-sidebar">
-      <h4><img src="/images/fi.png" alt="" />Categories</h4>
+      <h4><img src="/public/images/fi.png" alt="" />Categories</h4>
       <ul>
         {console.log('cat', category)}
         {category.map(cat => {
