@@ -14,7 +14,7 @@ class Single extends React.Component{
 
   componentDidMount(){
     console.log('post')
-    Axios.get(`/api/content/${this.props.match.params.id}`).then((res) => {
+    Axios.get(`http://vshare.codends.net/api/content/${this.props.match.params.id}`).then((res) => {
         // console.log(res);
         this.props.setOneContent(res.data);
         this.setState({

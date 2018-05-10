@@ -15,7 +15,7 @@ class Login extends React.Component{
 
   loginHandler = (e) => {
     e.preventDefault();
-    Axios.post('./api/user/login', {
+    Axios.post('http://vshare.codends.net/api/user/login', {
       email: this.state.email, 
       password: this.state.password
     })

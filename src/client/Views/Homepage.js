@@ -14,13 +14,13 @@ class Homepage extends React.Component{
   }
 
   componentDidMount() {
-    Axios.get('/api/content/').then((res) => {
+    Axios.get('http://vshare.codends.net/api/content/').then((res) => {
       this.props.setContent(res.data);
       this.setState({
         content: true
       })
     }).catch((e) => {
-      console.log('error found in ./api/content/', e);
+      console.log('error found in .http://vshare.codends.net/api/content/', e);
     })
   }
 

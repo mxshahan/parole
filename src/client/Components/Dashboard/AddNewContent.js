@@ -15,7 +15,7 @@ class AddNewContent extends React.Component{
     progress: false
   }
   componentDidMount() {
-    Axios.get(`/api/category`).then((res) => {
+    Axios.get(`http://vshare.codends.net/api/category`).then((res) => {
       this.setState({
         categoryList: res.data
       })
@@ -54,7 +54,7 @@ class AddNewContent extends React.Component{
     };
     Axios({
         method: 'post',
-        url: `/api/content`,
+        url: `http://vshare.codends.net/api/content`,
         data: body,
         headers: {
             'Content-Type': 'application/json',

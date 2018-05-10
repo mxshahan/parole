@@ -27,7 +27,7 @@ class Register extends React.Component{
       username = ''
     } = this.state;
 
-    Axios.post('./api/user/create', {
+    Axios.post('http://vshare.codends.net/api/user/create', {
       firstname,
       lastname,
       email,

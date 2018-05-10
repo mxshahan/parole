@@ -12,7 +12,7 @@ class MyContent extends React.Component{
   componentDidMount() {
     Axios({
       method: 'get',
-      url: `/api/content/my`,
+      url: `http://vshare.codends.net/api/content/my`,
       headers: {
         'authorization': localStorage.getItem('auth')
       }
@@ -29,7 +29,7 @@ class MyContent extends React.Component{
   }
 
   deleteItem = (id) => {
-    Axios.delete(`/api/content/${id}`, {
+    Axios.delete(`http://vshare.codends.net/api/content/${id}`, {
       headers: {
         'authorization': localStorage.getItem('auth')
       }
