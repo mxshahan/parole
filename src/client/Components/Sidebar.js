@@ -5,12 +5,12 @@ const Sidebar = () => (
 <div className="right-content">
   <div className="popular">
     <h3>Popular Videos</h3>
-    <p><img src="/public/images/l1.png" title="likes" /> 10,000</p>
+    <p><img src="/images/l1.png" title="likes" /> 10,000</p>
     <div className="clear"> </div>
   </div>
   <div className="grid1">
     <h3>Consectetur adipisicing elit</h3>
-    <a href="#"><img src="/public/images/g7.jpg" title="video-name" /></a>
+    <a href="#"><img src="/images/g7.jpg" title="video-name" /></a>
     <div className="time1">
       <span>2:50</span>
     </div>
@@ -18,9 +18,9 @@ const Sidebar = () => (
     <div className="grid-info">
       <div className="video-share">
         <ul>
-          <li><a href="#"><img src="/public/images/likes.png" title="links" /></a></li>
-          <li><a href="#"><img src="/public/images/link.png" title="Link" /></a></li>
-          <li><a href="#"><img src="/public/images/views.png" title="Views" /></a></li>
+          <li><a href="#"><img src="/images/likes.png" title="links" /></a></li>
+          <li><a href="#"><img src="/images/link.png" title="Link" /></a></li>
+          <li><a href="#"><img src="/images/views.png" title="Views" /></a></li>
         </ul>
       </div>
       <div className="video-watch">
@@ -36,13 +36,13 @@ const Sidebar = () => (
   <div className="Recent-Vodeos">
     <h3>Recent-Videos</h3>
     <div className="video1">
-      <img src="/public/images/r1.jpg" title="video2" />
+      <img src="/images/r1.jpg" title="video2" />
       <span>Lorem ipsum dolor sit amet,</span>
       <p>s consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
       <div className="clear"> </div>
     </div>
     <div className="video1 video2">
-      <img src="/public/images/r2.jpg" title="video2" />
+      <img src="/images/r2.jpg" title="video2" />
       <span>Lorem ipsum dolor sit amet,</span>
       <p>s consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
       <div className="clear"> </div>

@@ -6,7 +6,7 @@ const DST = path.join(__dirname, 'dist');
 const STATIC = path.resolve(__dirname, 'static');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: `${SRC}/client/app.js`,
   output: {
     path: `${DST}/client`,

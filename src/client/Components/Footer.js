@@ -57,9 +57,9 @@ const Footer = () => (
     <div className="box1">
       <h4>Stay in touch on</h4>
       <ul className="social">
-        <li><img src="/public/images/facebook.png" title="facebook"/><Link to="#">Facebook</Link></li>
-        <li><img src="/public/images/twitter.png" title="twitter"/><Link to="#">Twitter</Link></li>
-        <li><img src="/public/images/gplus.png" title="google+"/><Link to="#">Google+</Link></li>
+        <li><img src="/images/facebook.png" title="facebook"/><Link to="#">Facebook</Link></li>
+        <li><img src="/images/twitter.png" title="twitter"/><Link to="#">Twitter</Link></li>
+        <li><img src="/images/gplus.png" title="google+"/><Link to="#">Google+</Link></li>
       </ul>
     </div>
     <div className="clear"> </div>

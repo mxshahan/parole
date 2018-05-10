@@ -25,7 +25,7 @@ class CategorySingle extends React.Component{
     console.log(this.props.cat_id)
     return (
       <div className="recent-videos">
-        <h5><img src="/public/images/recent.png" alt="" />Recent-videos</h5>
+        <h5><img src="/images/recent.png" alt="" />Recent-videos</h5>
         <div className="grids grids2">
         {/* {this.state.content && 
           props.cat_content.map((content, key) => {
