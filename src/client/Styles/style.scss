@@ -56,7 +56,6 @@ body{
 .top-nav ul li{
 	display: inline-block;
 	float: left;
-	width: 105px;
 	background: rgb(30, 93, 173);
 	color: rgb(218, 216, 216);
 	border-left: 1px solid rgb(47, 75, 124);
@@ -149,6 +148,7 @@ body{
 	float:left;
 	margin-bottom: 15px;
 }
+
 .grid2 {
 	width: 29.7%;
 }
@@ -162,6 +162,11 @@ body{
 	margin-bottom:5px;
 	font-size: 0.9em;
 }
+#grid-thumb{
+	height: 150px;
+	overflow: hidden;
+}
+
 .video-watch a,.lables p a{
 	color:rgb(30, 93, 173);
 }

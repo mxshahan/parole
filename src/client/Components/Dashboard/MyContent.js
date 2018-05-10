@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import { connect } from 'react-redux';
-import { myContent } from '../../Actions/content';
+import { myContent, deleteContent } from '../../Actions/content';
 import Grid from '../Grids/Grid';
 
 class MyContent extends React.Component{
@@ -28,8 +28,20 @@ class MyContent extends React.Component{
     })
   }
 
+  deleteItem = (id) => {
+    Axios.delete(`/api/content/${id}`, {
+      headers: {
+        'authorization': localStorage.getItem('auth')
+      }
+    }).then((res) => {
+      this.props.deleteItem(id)
+      console.log(res.data)
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
+
   render(){
-    console.log(this.props.contents, this.state.content)
     return (
       <div className="content">
         <div className="left-content">
@@ -37,7 +49,7 @@ class MyContent extends React.Component{
             <div className="box">
               <div className="grids">
               {this.props.contents.map((content, key) => {
-                return <Grid content={content} key={content._id}/>
+                return <Grid deleteItem={this.deleteItem} isUser={true} content={content} key={content._id}/>
               }) }
               </div>
             </div>
@@ -52,7 +64,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  myContent: (data) => dispatch(myContent(data))
+  myContent: (data) => dispatch(myContent(data)),
+  deleteItem: (id) => dispatch(deleteContent(id))  
 })
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyContent);

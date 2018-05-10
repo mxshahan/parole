@@ -27,10 +27,21 @@ const Header = ({isAuthenticated, LogoutUser, ...props}) => (
     {/* start-top-nav */}
     <div className="top-nav">
       <ul>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/category">Categories</NavLink></li>
-        <li><NavLink to="/about">About</NavLink></li>
-        <li><NavLink to="/contact">Contact</NavLink></li>
+        <li><NavLink activeClassName="active" to="/">Home</NavLink>
+          <p>Homepage</p>
+        </li>
+        <li><NavLink activeClassName="active" to="/category">Categories</NavLink>
+          <p>All Categories</p>
+        </li>
+        <li><NavLink activeClassName="active" to="/about">About</NavLink>
+          <p>About US</p>
+        </li>
+        <li><NavLink activeClassName="active" to="/contact">Contact</NavLink>
+          <p>Contact Us</p>
+        </li>
+        <li><NavLink activeClassName="active" to="/order">Order Now</NavLink>
+          <p>Order Custom Video</p>
+        </li>
       </ul>
     </div>
     <div className="clear"> </div>

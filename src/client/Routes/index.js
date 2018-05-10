@@ -29,8 +29,8 @@ const AppRouter = () => (
         <Route path='/' exact={true} component={Homepage} />
         <Route path='/category' component={Category} />
         <Route path='/category/:id' component={CategorySingle} />
-        <Route path='/about' component={About} />
-        <Route path='/contact' component={Contact} />
+        {/* <Route path='/about' component={About} />
+        <Route path='/contact' component={Contact} /> */}
         <PublicRoute path='/login' component={Login} />
         <PublicRoute path='/register' component={Register} />
         <Route path='/single/:id' component={Single}/>

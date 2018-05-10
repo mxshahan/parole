@@ -19,7 +19,7 @@ const PrivateRoute = ({isAuthenticated, component: Component, ...rest}) => (
 )
 
 const mapStateToProps = (state) => ({
-    isAuthenticated: !!state.auth.token
+    isAuthenticated: !!localStorage.getItem('auth')
 })
 
 export default connect(mapStateToProps)(PrivateRoute);

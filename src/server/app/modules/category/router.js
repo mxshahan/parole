@@ -44,7 +44,7 @@ export const routes = [
     method: 'POST',
     route: '/',
     handlers: [
-      isAuthenticated,
+      // isAuthenticated,
       CategoryCreate
     ]
   }

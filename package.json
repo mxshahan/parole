@@ -12,8 +12,7 @@
     "test": "jest --forceExit",
     "serve-client": "webpack-dev-server -w",
     "build-client": "webpack -w",
-    "babel": "babel src/client --out-dir dist/client",
-    "serv": "live-server dist"
+    "babel": "babel src/client --out-dir dist/client"
   },
   "repository": {
     "type": "git",

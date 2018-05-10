@@ -29,10 +29,10 @@ class Category extends React.Component{
     })
   }
 
-  filterComponent = () => {
+  filterComponent = async () => {
     // console.log(this.state.filter)
-    Axios.get(`/api/content/category/${this.state.filter}`).then((res) => {
-      this.props.setCatContent(res.data);
+    Axios.get(`/api/content/category/${this.state.filter}`).then(async (res) => {
+      await this.props.setCatContent(res.data);
       console.log('after',res.data)
       this.setState({
         content: true
@@ -54,6 +54,7 @@ class Category extends React.Component{
 
   render(){
     const props = this.props;
+    console.log('cont', this.state.content, props.con);
     return (
       <div className="content">
       <div className="categories">
@@ -90,8 +91,8 @@ class Category extends React.Component{
 }
 const mapStateToProps = (state) => ({
   allContent: state.content.all,
-  category: state.content.category,
-  cat_content: state.content.cat_content
+  category: state.content.category, // Getting all Category
+  cat_content: state.content.cat_content // Filtered Category Content
 });
 
 const mapDispatchToProps = (dispatch) => ({

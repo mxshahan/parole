@@ -36,3 +36,7 @@ export const getSingle = (id) => ({
     type: 'GET_SINGLE',
     id
 })
+export const deleteContent = (id) => ({
+    type: 'DELETE_CONTENT',
+    id
+})

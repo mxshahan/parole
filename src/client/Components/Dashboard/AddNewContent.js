@@ -11,7 +11,8 @@ class AddNewContent extends React.Component{
     description: '',
     parmalink: '',
     thumbnail: '',
-    uploadStatus: null
+    uploadStatus: null,
+    progress: false
   }
   componentDidMount() {
     Axios.get(`/api/category`).then((res) => {
@@ -42,7 +43,9 @@ class AddNewContent extends React.Component{
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('processing')
+    this.setState({
+        progress: 1
+    })
     const body = {
         title: this.state.title,
         category: this.state.category,
@@ -59,9 +62,16 @@ class AddNewContent extends React.Component{
         }
     }).then((res) => {
         console.log(res.data)
-        this.props.history.push('/dashboard/mycontent')
+        this.props.history.push('/dashboard/mycontent');
+
+        this.setState({
+            progress: 2
+        })
     }).catch((e) => {
         console.log(e)
+        this.setState({
+            progress: undefined
+        })
     })
   }
 
@@ -130,7 +140,12 @@ class AddNewContent extends React.Component{
                   </div>
               </div>
           </div> */}
-          <input type="submit" className="btn btn-primary" defaultValue="Save & Publish"/>
+            <input type="submit" className="btn btn-primary" defaultValue="Save & Publish"/>
+            <div className="text-center"> 
+            {this.state.progress === 1 && <span className="alert alert-warning">Please Wait...</span>}
+            {this.state.progress === 2 && <span className="alert alert-success">Successfully Published</span>}
+            {this.state.progress === undefined && <span className="alert alert-danger">Error While Publishing</span>}
+            </div>
       </form>
     </div>
     )

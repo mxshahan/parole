@@ -32,11 +32,14 @@ class Homepage extends React.Component{
             <div className="search-left">
               <p>Latest Video Form VideosTube</p>
             </div>
-            <div className="search-right">
+            {/* <div className="search-right">
               <form>
-                <input type="text"/><input type="submit" value="" />
+                <input type="text"/>
+                <button onClick={(e) => {
+                  e.preventDefault()
+                }}><i className="fa fa-search"></i></button>
               </form>
-            </div>
+            </div> */}
             <div className="clear"> </div>
           </div>
         {this.state.content ? 
