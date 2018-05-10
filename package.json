@@ -3,16 +3,8 @@
   "version": "1.0.0",
   "description": "Koa api development kit",
   "scripts": {
-    "dev": "nodemon bin/server.dev.js",
-    "prebuild": "rimraf dist",
     "build": "node bin/server.build.js",
-    "nuxt": "cross-env NODE_ENV=production nuxt build",
-    "start": "cross-env NODE_ENV=production node dist/server/core",
-    "doc": "apidoc -i src/ -o doc/",
-    "test": "jest --forceExit",
-    "serve-client": "webpack-dev-server -w",
-    "build-client": "webpack -w",
-    "babel": "babel src/client --out-dir dist/client"
+    "start": "cross-env NODE_ENV=production node dist/server/core"
   },
   "repository": {
     "type": "git",
