@@ -4,7 +4,8 @@
   "description": "Koa api development kit",
   "scripts": {
     "build": "node bin/server.build.js",
-    "start": "cross-env NODE_ENV=production node dist/server/core"
+    "start": "cross-env NODE_ENV=production node dist/server/core",
+    "dev" : "nodemon bin/server.dev.js"
   },
   "repository": {
     "type": "git",
