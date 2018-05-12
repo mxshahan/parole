@@ -31,7 +31,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'ordinary'
   },
-  contents: [{
+  shiping_address : {
+    type : String,
+  },
+  order : [{
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'orderModel' 
+  }],
+  purchase : [{
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'purchaseModel'
+  }],
+  download: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'contentModel'
   }],

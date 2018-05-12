@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import timestamp from 'mongoose-timestamp';
 import { Crud } from '@utl';
 
-const contentSchema = new mongoose.Schema({
+const adminSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -44,13 +44,13 @@ const contentSchema = new mongoose.Schema({
   }
 });
 
-// contentSchema.plugin(uniqueValidator);
-contentSchema.plugin(timestamp);
+// adminSchema.plugin(uniqueValidator);
+adminSchema.plugin(timestamp);
 
-const contentModel = mongoose.model('contentModel', contentSchema);
-const contentCrud = new Crud(contentModel);
+const adminModel = mongoose.model('adminModel', adminSchema);
+const adminCrud = new Crud(adminModel);
 
 export {
-  contentCrud,
-  contentModel
+  adminCrud,
+  adminModel
 };
