@@ -5,8 +5,8 @@ const SRC = path.resolve(__dirname, 'src');
 const DST = path.join(__dirname, 'dist');
 const STATIC = path.resolve(__dirname, 'static');
 
-const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -34,11 +34,16 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin(),
-    new BaseHrefWebpackPlugin({
-      baseHref: '/'
-    })
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
+    }),
+    new webpack.HotModuleReplacementPlugin()
+    // new HtmlWebpackPlugin(),
+    // new BaseHrefWebpackPlugin({
+    //   baseHref: '/'
+    // })
   ],
   devtool: 'cheap-module-source-map',
   devServer: {

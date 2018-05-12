@@ -1,9 +1,188 @@
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script|Titillium+Web:400,700');
+@import url('./contact.scss');
+@import url('./login.scss');
+
+$primary: #722BC2;
+$secondary: #B86BDC;
+$tertiary: #423E57;
+$border: #e5e5e5;
+$text: #8A898B;
+$sliderHeight: 570px;
+$r-primary: rgba(114,43,194,1);
+$r-secondary: rgba(184,107,220,0.5);
+$blue: #2F80ED;
+
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  color:$text;
+}
+
+section{
+  padding: 20px 0px;
+}
+
+.section-heading{
+  padding: 20px 0px;
+}
+
+.bg-pri{
+  background-color: $primary !important;
+}
+.bg-sec{
+  background-color: $secondary !important;
+}
+.bg-ter{
+  background-color: $tertiary !important;
+}
+.bg-blue{
+  background-color: $blue !important;
+}
+
+.text-pri{
+  color: $primary !important;
+}
+.text-sec{
+  color: $secondary !important;
+}
+.text-ter{
+  color: $tertiary !important;
+}
+.text-blue{
+  color: $blue !important;
+}
+
+.text-lt{
+  color: $text
+}
+
+.btn-pri{
+  background: $tertiary;
+  box-shadow: 2px 2px 2px 0px $text;
+  color: #fff;
+}
+
+.bg-g-x{
+  background: -moz-linear-gradient(to right, $secondary, $primary);
+  background: -webkit-linear-gradient(to right, $secondary, $primary);
+  background: -o-linear-gradient(to right, $secondary, $primary);
+  background: -ms-linear-gradient(to right, $secondary, $primary);
+  background: linear-gradient(to right, $secondary, $primary);
+}
+
+.bg-g-y{
+  background: -moz-linear-gradient(to top, $secondary, $primary);
+  background: -webkit-linear-gradient(to top, $secondary, $primary);
+  background: -o-linear-gradient(to top, $secondary, $primary);
+  background: -ms-linear-gradient(to top, $secondary, $primary);
+  background: linear-gradient(to top, $secondary, $primary);
+}
+
+.bg-g-o{
+  background: -moz-linear-gradient(to top, $r-secondary, $r-primary);
+  background: -webkit-linear-gradient(to top, $r-secondary, $r-primary);
+  background: -o-linear-gradient(to top, $r-secondary, $r-primary);
+  background: -ms-linear-gradient(to top, $r-secondary, $r-primary);
+  background: linear-gradient(to top, $r-secondary, $r-primary);
+}
+
+// Header Portion
+header .navbar-brand h2{
+  font-family: 'Kaushan Script', sans-serif;
+  color: $primary;
+}
+
+header .nav-link{
+  color: $text;
+  font-size: 16px;
+}
+
+
+// Slider Portion
+#slider{
+  position: relative;
+}
+
+#slider .item{
+  height: $sliderHeight;
+}
+#slider #caption{
+  padding: 20px 0px;
+  position: absolute;
+  left: 0px;
+  bottom: 30%;
+  right: 0px;
+  z-index: 99;
+}
+
+#slider #caption h1{
+  font-size: 60px;
+  font-weight: bold;
+}
+
+#slider .owl-dots{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 20%;
+  z-index: 999;
+}
+
+#slider .owl-dots .owl-dot span{
+  background: #fff;
+  padding: 10px;
+}
+
+#slider .owl-dots .active span{
+  background: $primary
+}
+
+
+#card{
+  position: relative;
+}
+
+#card #preview{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: rgba(0, 0, 0, 0.6);
+  padding-top: 60px;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  cursor: pointer;
+  color:#fff;
+}
+
+#card:hover #preview{
+  opacity: 1;
+  -webkit-transition: all 0.3s ease-in 0s;
+  -ms-transition: all 0.3s ease-in 0s;
+  -moz-transition: all 0.3s ease-in 0s;
+  -o-transition: all 0.3s ease-in 0s;
+  transition: all 0.3s ease-in 0s;
+}
+
+.feature-nav{
+  box-shadow: 0px 0px 15px 3px #efefef
+}
+
+.feature-nav a:focus{
+  font-weight: bold;
+}
+
 .videos form button{
   margin-left: -2px;
 }
 
 header .navbar-nav .active{
-  color: #060
+  color: $primary;
 }
 
 .dropdown .dropdown-menu{

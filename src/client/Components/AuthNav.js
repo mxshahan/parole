@@ -13,16 +13,16 @@ class AuthNav extends React.Component{
     return(
       <Container>
         <Row>
-          <div className="col-md-12  my-2">
-            <div className="float-left">
-              <Link to="tel:+998888888888" className="btn btn-outline-success">Call Us: +99 888-888-8888</Link>
+          <div className="col-md-12 my-3">
+            <div className="float-left mt-1">
+              <Link to="tel:+998888888888" className="text-white">Call Us: +99 888-888-8888</Link>
             </div>
             {isAuthenticated ?
               <UserProfileDropdown/>
               :
               <div className="float-right">
-                <Link to="/login" className="btn btn-info mr-2 py-1">Login</Link>
-                <Link to="/register" className="btn btn-info py-1">Register</Link>
+                <Link to="/login" className="text-white mr-2 py-1">Login</Link>
+                <Link to="/register" className="text-white py-1">Register</Link>
               </div>
             }
           </div>

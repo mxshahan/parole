@@ -36,23 +36,23 @@ class UserProfileDropdown extends React.Component{
     return (
       <div className="float-right">
         {data ?      
-          <div className="dropdown p-2">
-            <Link to="#" data-toggle="dropdown">
+          <div className="dropdown">
+            <Link className="text-white" to="#" data-toggle="dropdown">
               Hi, {data.user.firstname} {data.user.lastname} 
-              <span ><i className="fa fa-arrow-down"></i></span>
+              <span><i className="ml-2 fas fa-caret-down"></i></span>
             </Link>
             <ul className="dropdown-menu  dropdown-menu-right p-0 mt-10" style={{top: 20}}>
               <li className="nav-item">
-                <Link activeClassName="active" to="/myaccount" className="nav-link text-info"><i className="fa fa-user"></i> My Account</Link>
+                <Link to="/myaccount" className="nav-link text-info"><i className="fa fa-user"></i> My Account</Link>
               </li>
               <li className="nav-item">
-                <Link activeClassName="active" to="/myaccount/settings" className="nav-link text-info"><i className="fa fa-key"></i> Account Setting</Link>
+                <Link to="/myaccount/settings" className="nav-link text-info"><i className="fa fa-key"></i> Account Setting</Link>
               </li>
               <li className="nav-item">
                 <Link onClick={() => {
                     localStorage.clear();
                     LogoutUser();
-                }} activeClassName="active" to="#" className="nav-link text-info"><i className="fa fa-sign-out"></i> Logout</Link>
+                }} to="#" className="nav-link text-info"><i className="fa fa-sign-out"></i> Logout</Link>
               </li>
             </ul>
           </div> 

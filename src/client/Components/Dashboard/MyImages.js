@@ -1,21 +1,40 @@
 import React from 'react';
 import Row from '../Row';
 import MyImageCard from './MyImage.Card';
+import Card from '../Card';
 
 class MyImages extends React.Component{
   render(){
     return (
       <div className="col-md-9">
         <Row>
-          <MyImageCard/>
-          <MyImageCard/>
-          <MyImageCard/>
-          <MyImageCard/>
-          <MyImageCard/>
-          <MyImageCard/>
-          <MyImageCard/>
-          <MyImageCard/>
-          <MyImageCard/>
+          <div className="col-md-4">
+            <Card/>
+          </div>
+          <div className="col-md-4">
+            <Card/>
+          </div>
+          <div className="col-md-4">
+            <Card/>
+          </div>
+          <div className="col-md-4">
+            <Card/>
+          </div>
+          <div className="col-md-4">
+            <Card/>
+          </div>
+          <div className="col-md-4">
+            <Card/>
+          </div>
+          <div className="col-md-4">
+            <Card/>
+          </div>
+          <div className="col-md-4">
+            <Card/>
+          </div>
+          <div className="col-md-4">
+            <Card/>
+          </div>
         </Row>
       </div>
     )

@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom'
 // import Model from './Model';
 
 const Card = ({ data }) => (
-  <div className="card bg-light text-center mb-4">
-    <div className="card-body">
-      <h3>{data ? data.firstName + ' ' + data.lastName : 'No Title'}</h3>
-      <p className="text-secondary">{data ? data.email : 'No Email'}</p>
+  <div className="card bg-light text-center mb-4" id="card">
+    <div className="card-body p-0">
+      <img src="/images/g5.jpg" className="img-fluid" alt="Video"/>
     </div> 
-    <div className="card-footer">
-      <button type="button" className="btn btn-primary" data-toggle="modal" data-target={data ? `#${data._id}`: 'No date'}>
-      View Details 
-    </button>
+    <div id="preview">
+      <span><i className="fas fa-play-circle fa-3x"></i></span>
     </div>
   </div>
 )

@@ -3,7 +3,7 @@ import Container from '../Components/Container';
 import Search from '../Components/Videos/Search';
 import Row from '../Components/Row';
 import Contents from '../Components/Videos/Content';
-import VideosNav from '../Components/Videos/Video.Nav';
+import FeatureNav from '../Components/Homepage/FeatureNav';
 import Counter from '../Components/Homepage/Counter';
 
 class Videos extends React.Component{
@@ -15,10 +15,10 @@ class Videos extends React.Component{
         <Container>
           <Search/>
           <Row>
-            <div className="col-md-2">
-              <VideosNav/>
+            <div className="col-md-3">
+              <FeatureNav/>
             </div>
-            <div className="col-md-10">
+            <div className="col-md-9">
               <Contents/>
             </div>
           </Row>
