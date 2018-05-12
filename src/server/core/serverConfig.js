@@ -38,7 +38,8 @@ function baseConfig(app) {
   app.use(convert.compose(
     historyApiFallback(),
     // mount(serve(config.get('paths.dist.server'))),
-    mount(serve(config.get('paths.static')))
+    mount(serve(config.get('paths.static'))),
+    mount('/dist', serve(config.get('paths.dist.server')))
   ));
 }
 

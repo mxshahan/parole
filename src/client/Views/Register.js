@@ -5,6 +5,7 @@ import Container from '../Components/Container';
 import Row from '../Components/Row';
 import Axios from 'axios';
 import { createUser } from '../Actions/auth';
+import conf from '../config';
 
 
 class Register extends React.Component{
@@ -27,7 +28,7 @@ class Register extends React.Component{
       username = ''
     } = this.state;
 
-    Axios.post('http://vshare.codends.net/api/user/create', {
+    Axios.post(`${conf.server}/api/user/create`, {
       firstname,
       lastname,
       email,

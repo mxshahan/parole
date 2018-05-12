@@ -6,6 +6,7 @@ import { setSingleContent, getSingle } from '../Actions/content';
 import Axios from 'axios';
 import { connect } from 'react-redux';
 import SingleContent from '../Components/Content/Single.Content';
+import conf from '../config';
 
 class Single extends React.Component{
   state = {
@@ -14,7 +15,7 @@ class Single extends React.Component{
 
   componentDidMount(){
     console.log('post')
-    Axios.get(`http://vshare.codends.net/api/content/${this.props.match.params.id}`).then((res) => {
+    Axios.get(`${conf.server}/api/content/${this.props.match.params.id}`).then((res) => {
         // console.log(res);
         this.props.setOneContent(res.data);
         this.setState({
@@ -31,7 +32,6 @@ class Single extends React.Component{
 
 
 render(){
-  console.log(this.props.single)
   return(
     <div className="content">
       <div className="inner-page">

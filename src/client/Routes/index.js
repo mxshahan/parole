@@ -17,7 +17,12 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import CategorySingle from '../Components/Categories/CategorySingle';
 import AddNewContent from '../Components/Dashboard/AddNewContent';
-import MyContent from '../Components/Dashboard/MyContent';
+import MyAccount from '../Components/Dashboard/MyAccount';
+import Videos from '../Views/Videos';
+import Images from '../Views/Images';
+import MyImages from '../Components/Dashboard/MyImages';
+import MyVideos from '../Components/Dashboard/MyVideos';
+import MyMemes from '../Components/Dashboard/MyMemes';
 
 export const history = createHistory()
 
@@ -31,12 +36,23 @@ const AppRouter = () => (
         <Route path='/category/:id' component={CategorySingle} />
         {/* <Route path='/about' component={About} />
         <Route path='/contact' component={Contact} /> */}
+        <Route path='/single/:id' component={Single}/>
+        <Route path="/videos" component={Videos}/>
+        <Route path="/images" component={Images}/>
+        
         <PublicRoute path='/login' component={Login} />
         <PublicRoute path='/register' component={Register} />
-        <Route path='/single/:id' component={Single}/>
-        <PrivateRoute path="/dashboard" exact={true} component={Dashboard}/>
-        <PrivateRoute path="/dashboard/post" component={AddNewContent}/>
-        <PrivateRoute path="/dashboard/mycontent" component={MyContent}/>
+
+        <PrivateRoute path="/myaccount" exact={true} component={MyAccount}/>
+        <PrivateRoute path="/mycontent/post" component={AddNewContent}/>
+        <PrivateRoute path="/myaccount/downloads/images" exact={true} component={MyImages}/>
+        <PrivateRoute path="/myaccount/downloads/videos" exact={true} component={MyVideos}/>
+        <PrivateRoute path="/myaccount/downloads/memes" exact={true} component={MyMemes}/>
+
+        <PrivateRoute path="/myaccount/orders/images" exact={true} component={MyImages}/>
+        <PrivateRoute path="/myaccount/orders/videos" exact={true} component={MyVideos}/>
+        <PrivateRoute path="/myaccount/orders/memes" exact={true} component={MyMemes}/>
+
         <Route component={NotFound} />
       </Switch>
       <Footer/>      

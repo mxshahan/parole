@@ -4,6 +4,7 @@ import CategoryList from '../Components/Categories/CategoryList';
 import { connect } from 'react-redux'
 import { setCategory, setCatContent } from '../Actions/content';
 import Axios from 'axios';
+import conf from '../config';
 
 class Category extends React.Component{
   state = {
@@ -13,7 +14,7 @@ class Category extends React.Component{
   }
 
   componentDidMount() {
-    Axios.get(`http://vshare.codends.net/api/category`).then((res) => {
+    Axios.get(`${conf.server}/api/category`).then((res) => {
       // console.log(res.data)
       this.props.setCategory(res.data);
       this.setState({
@@ -25,13 +26,13 @@ class Category extends React.Component{
       this.setState({
         category: false
       })
-      console.log('error found in .http://vshare.codends.net/api/content/', e);
+      console.log('error found ', e);
     })
   }
 
   filterComponent = async () => {
     // console.log(this.state.filter)
-    Axios.get(`http://vshare.codends.net/api/content/category/${this.state.filter}`).then(async (res) => {
+    Axios.get(`${conf.server}content/category/${this.state.filter}`).then(async (res) => {
       await this.props.setCatContent(res.data);
       console.log('after',res.data)
       this.setState({
@@ -41,7 +42,7 @@ class Category extends React.Component{
       this.setState({
         content: undefined
       })
-      console.log('error found in http://vshare.codends.net/api/content/', e);
+      console.log('error found', e);
     })
   }
 

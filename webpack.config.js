@@ -5,8 +5,11 @@ const SRC = path.resolve(__dirname, 'src');
 const DST = path.join(__dirname, 'dist');
 const STATIC = path.resolve(__dirname, 'static');
 
+const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: `${SRC}/client/app.js`,
   output: {
     path: `${DST}/client`,
@@ -16,7 +19,8 @@ module.exports = {
     rules: [{
       test: /\.(js|jsx)$/,
       loader: 'babel-loader',
-      exclude: '/node_modules/'
+      exclude: '/node_modules/',
+      query: { compact: false }
     }, {
       test: /\.(scss|css)$/,
       use: [
@@ -30,7 +34,11 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin(),
+    new BaseHrefWebpackPlugin({
+      baseHref: '/'
+    })
   ],
   devtool: 'cheap-module-source-map',
   devServer: {

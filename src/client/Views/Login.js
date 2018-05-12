@@ -5,6 +5,8 @@ import Axios from 'axios'
 import Container from '../Components/Container'
 import Row from '../Components/Row'
 import { startLogin } from '../Actions/auth'
+import conf from '../config';
+
 
 class Login extends React.Component{
   state = {
@@ -15,7 +17,7 @@ class Login extends React.Component{
 
   loginHandler = (e) => {
     e.preventDefault();
-    Axios.post('http://vshare.codends.net/api/user/login', {
+    Axios.post(`${conf.server}/api/user/login`, {
       email: this.state.email, 
       password: this.state.password
     })
@@ -24,7 +26,7 @@ class Login extends React.Component{
       localStorage.setItem('auth', res.data.token);
       localStorage.setItem('acc_type', res.data.acc_type);
       this.props.startLogin(res.data);
-      this.props.history.push('/dashboard');
+      this.props.history.push('/myaccount');
     })
     .catch((e) => {
       this.setState({

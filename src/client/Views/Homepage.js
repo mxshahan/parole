@@ -6,6 +6,12 @@ import { NavLink } from 'react-router-dom';
 import Grid from '../Components/Grids/Grid';
 import Sidebar from '../Components/Sidebar';
 import { setContent } from '../Actions/content';
+import conf from '../config';
+import Slider from '../Components/Homepage/Slider';
+import BrowseRepo from '../Components/Homepage/BrowseRepo';
+import FeatureContent from '../Components/Homepage/FeatureContent';
+import Counter from '../Components/Homepage/Counter';
+import QuickStart from '../Components/Homepage/QuickStart';
 
 class Homepage extends React.Component{
   state = {
@@ -14,59 +20,24 @@ class Homepage extends React.Component{
   }
 
   componentDidMount() {
-    Axios.get('http://vshare.codends.net/api/content/').then((res) => {
+    Axios.get(`${conf.server}/api/content/`).then((res) => {
       this.props.setContent(res.data);
       this.setState({
         content: true
       })
     }).catch((e) => {
-      console.log('error found in .http://vshare.codends.net/api/content/', e);
+      console.log('error found', e);
     })
   }
 
   render(){
     return (
     <div className="content">
-        <div className="left-content">
-          <div className="searchbar">
-            <div className="search-left">
-              <p>Latest Video Form VideosTube</p>
-            </div>
-            {/* <div className="search-right">
-              <form>
-                <input type="text"/>
-                <button onClick={(e) => {
-                  e.preventDefault()
-                }}><i className="fa fa-search"></i></button>
-              </form>
-            </div> */}
-            <div className="clear"> </div>
-          </div>
-        {this.state.content ? 
-          <div className="box">
-            <div className="grids">
-            {this.props.allContent.map((content, key) => {
-              return <Grid content={content} key={content._id}/>
-            }) }
-            </div>
-          </div>
-        : 'Loading...'}
-          {/* <div className="clear"> </div>
-            <ul className="dc_pagination dc_paginationA dc_paginationA03">
-              <li><a href="#" className="first">First</a></li>
-              <li><a href="#" className="previous">Previous</a></li>
-              <li><NavLink to="/?p=1" activeClassName="current">1</NavLink></li>
-              <li><NavLink to="/?p=2" activeClassName="current">2</NavLink></li>
-              <li><NavLink to="" activeClassName="current">3</NavLink></li>
-              <li><NavLink to="" activeClassName="current">4</NavLink></li>
-              <li><a href="#" className="next">Next</a></li>
-              <li><a href="#" className="last">Last</a></li>
-            </ul>
-          */}
-          <div className="clear"> </div> 
-        </div>
-      <Sidebar/>
-      <div className="clear"> </div>  
+        <Slider/>
+        <BrowseRepo/>
+        <FeatureContent/>
+        <Counter/>
+        <QuickStart/>
     </div>
     )
   }

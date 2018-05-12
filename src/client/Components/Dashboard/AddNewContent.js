@@ -2,6 +2,7 @@ import React from 'react';
 import '../../Styles/dashboard.scss';
 import Axios from 'axios';
 import storage from '../../Firebase/firebase';
+import conf from '../../config';
 
 class AddNewContent extends React.Component{
   state = {
@@ -15,7 +16,7 @@ class AddNewContent extends React.Component{
     progress: false
   }
   componentDidMount() {
-    Axios.get(`http://vshare.codends.net/api/category`).then((res) => {
+    Axios.get(`${conf.server}/api/category`).then((res) => {
       this.setState({
         categoryList: res.data
       })
@@ -54,7 +55,7 @@ class AddNewContent extends React.Component{
     };
     Axios({
         method: 'post',
-        url: `http://vshare.codends.net/api/content`,
+        url: `${conf.server}/api/content`,
         data: body,
         headers: {
             'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ class AddNewContent extends React.Component{
 
   render() {
     return (
-    <div className="right-content-dashboard" id="regLoginForm">
+    <div className="col-md-9" id="regLoginForm">
       <form role="form" onSubmit={this.handleSubmit} >
           <div className="row">
               <div className="col-md-6">

@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "Koa api development kit",
   "scripts": {
+    "dev": "nodemon bin/server.dev.js",
+    "prebuild": "rimraf dist",
     "build": "node bin/server.build.js",
-    "start": "cross-env NODE_ENV=production node dist/server/core"
+    "nuxt": "cross-env NODE_ENV=production nuxt build",
+    "start": "cross-env NODE_ENV=production node dist/server/core",
+    "doc": "apidoc -i src/ -o doc/",
+    "test": "jest --forceExit",
+    "build-client": "webpack -w"
   },
   "repository": {
     "type": "git",
@@ -33,6 +39,7 @@
     "glob": "^7.1.2",
     "grant": "^3.8.1",
     "history": "^4.7.2",
+    "html-webpack-plugin": "^3.2.0",
     "isdev": "^1.0.1",
     "jsonwebtoken": "^8.1.0",
     "kcors": "^2.2.1",
@@ -59,6 +66,7 @@
     "purest": "^3.1.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-owl-carousel": "^2.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
@@ -84,6 +92,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
+    "base-href-webpack-plugin": "^2.0.0",
     "css-loader": "^0.28.11",
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^12.1.0",

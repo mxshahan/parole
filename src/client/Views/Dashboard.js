@@ -1,7 +1,10 @@
 import React from 'react';
+import Container from '../Components/Container';
 const Dashboard = () => (
 <div className="content">
-  Hi
+  <Container>
+    
+  </Container>
 </div>
 )
 

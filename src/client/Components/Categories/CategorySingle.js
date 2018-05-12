@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import conf from '../../config';
 
 class CategorySingle extends React.Component{
   state = {
@@ -7,7 +8,7 @@ class CategorySingle extends React.Component{
     filter: this.props.firstFilter
   }
   componentDidMount(){
-    Axios.get(`http://vshare.codends.net/api/content/category/${this.props.match.params.id}`).then((res) => {
+    Axios.get(`${conf.server}/content/category/${this.props.match.params.id}`).then((res) => {
       this.props.setCatContent(res.data);
       // console.log('after',res.data)
       this.setState({
@@ -17,7 +18,7 @@ class CategorySingle extends React.Component{
       this.setState({
         content: undefined
       })
-      console.log('error found in .http://vshare.codends.net/api/content/', e);
+      console.log('error found in ', e);
     })
   }
 
