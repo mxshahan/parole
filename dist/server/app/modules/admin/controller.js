@@ -1,98 +1,98 @@
-import { contentCrud } from './content.model';
+import { adminCrud } from './admin.model';
 import { userCrud } from '../user/user.model';
 
 
-let content;
-let contentNew;
+let admin;
+let adminNew;
 let user;
 let isMatched;
 
-const filterContent = async (ctx) => {
+const filteradmin = async (ctx) => {
   try {
-    content = await contentCrud.get({
+    admin = await adminCrud.get({
       qr: { category: ctx.params.filter },
       populate: 'author category'
     });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = content;
+    ctx.body = admin;
   }
 };
 
-const contentCategory = async (ctx) => {
+const adminCategory = async (ctx) => {
   try {
-    content = await contentCrud.get({
+    admin = await adminCrud.get({
       select: 'category -_id',
       populate: 'category'
     });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = content;
+    ctx.body = admin;
   }
 };
 
-const contentAll = async (ctx) => {
+const adminAll = async (ctx) => {
   try {
-    content = await contentCrud.get({
+    admin = await adminCrud.get({
       populate: 'author'
     });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = content;
+    ctx.body = admin;
   }
 };
 
-const myContent = async (ctx) => {
+const myadmin = async (ctx) => {
   try {
-    content = await userCrud.single({
+    admin = await userCrud.single({
       qr: { _id: ctx.state.user.uid },
-      select: 'contents -_id',
-      populate: 'contents'
+      select: 'admins -_id',
+      populate: 'admins'
     });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = content.contents;
+    ctx.body = admin.admins;
   }
 };
 
-const userContent = async (ctx) => {
+const useradmin = async (ctx) => {
   try {
-    content = await userCrud.single({
+    admin = await userCrud.single({
       qr: { username: ctx.params.user },
-      select: 'contents -_id',
-      populate: 'contents'
+      select: 'admins -_id',
+      populate: 'admins'
     });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = content;
+    ctx.body = admin;
   }
 };
 
-const contentSingle = async (ctx) => {
+const adminSingle = async (ctx) => {
   try {
-    content = await contentCrud.single({
+    admin = await adminCrud.single({
       qr: { _id: ctx.params.id },
       populate: 'author'
     });
   } catch (e) {
     ctx.throw(404, e.message);
   } finally {
-    ctx.body = content;
+    ctx.body = admin;
   }
 };
 
-const contentCreate = async (ctx) => {
+const adminCreate = async (ctx) => {
   console.log(ctx.request.body);
-  const contentData = Object.assign({
+  const adminData = Object.assign({
     author: ctx.state.user.uid
   }, ctx.request.body);
   try {
-    contentNew = await contentCrud.create(contentData);
+    adminNew = await adminCrud.create(adminData);
   } catch (e) {
     ctx.throw(422, e.message);
   } finally {
@@ -103,28 +103,28 @@ const contentCreate = async (ctx) => {
     } catch (e) {
       ctx.throw(422, e.message);
     } finally {
-      user.contents.push(contentNew._id);
+      user.admins.push(adminNew._id);
       user.save();
       ctx.body = {
-        body: contentNew,
+        body: adminNew,
         message: 'Post is successful'
       };
     }
   }
 };
 
-const contentUpdate = async (ctx) => {
+const adminUpdate = async (ctx) => {
   try {
     user = await userCrud.single({
       qr: { _id: ctx.state.user.uid }
     });
-    isMatched = user.contents.indexOf(ctx.params.id);
+    isMatched = user.admins.indexOf(ctx.params.id);
   } catch (e) {
     ctx.throw(422, e.message);
   } finally {
     if (isMatched !== -1) {
       try {
-        content = await contentCrud.put({
+        admin = await adminCrud.put({
           params: {
             qr: { _id: ctx.params.id }
           },
@@ -134,7 +134,7 @@ const contentUpdate = async (ctx) => {
         ctx.throw(422, e.message);
       } finally {
         ctx.body = {
-          body: content,
+          body: admin,
           message: 'Post Updated..'
         };
       }
@@ -146,18 +146,18 @@ const contentUpdate = async (ctx) => {
   }
 };
 
-const contentDelete = async (ctx) => {
+const adminDelete = async (ctx) => {
   try {
     user = await userCrud.single({
       qr: { _id: ctx.state.user.uid }
     });
-    isMatched = user.contents.indexOf(ctx.params.id);
+    isMatched = user.admins.indexOf(ctx.params.id);
   } catch (e) {
     ctx.throw(422, e.message);
   } finally {
     if (isMatched !== -1) {
       try {
-        content = await contentCrud.delete({
+        admin = await adminCrud.delete({
           params: {
             qr: { _id: ctx.params.id }
           }
@@ -166,7 +166,7 @@ const contentDelete = async (ctx) => {
         ctx.throw(422, e.message);
       } finally {
         ctx.body = {
-          body: content,
+          body: admin,
           message: 'Deleted'
         };
       }
@@ -179,13 +179,13 @@ const contentDelete = async (ctx) => {
 };
 
 export {
-  contentAll,
-  contentSingle,
-  contentCreate,
-  contentUpdate,
-  contentDelete,
-  myContent,
-  userContent,
-  filterContent,
-  contentCategory
+  adminAll,
+  adminSingle,
+  adminCreate,
+  adminUpdate,
+  adminDelete,
+  myadmin,
+  useradmin,
+  filteradmin,
+  adminCategory
 };

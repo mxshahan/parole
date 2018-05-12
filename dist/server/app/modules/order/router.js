@@ -1,51 +1,59 @@
 import { isAuthenticated } from '@mid';
 import {
-  CategoryAll,
-  CategorySingle,
-  CategoryCreate,
-  CategoryUpdate,
-  CategoryDelete
+  OrderSingle,
+  OrderCreate,
+  OrderUpdate,
+  OrderDelete,
+  OrderLogin,
+  myAccount
 } from './controller';
 
-export const baseUrl = '/api/category';
+export const baseUrl = '/api/Order';
 
 export const routes = [
   {
     method: 'GET',
-    route: '/',
+    route: '/me',
     handlers: [
-      CategoryAll
+      isAuthenticated,
+      myAccount
     ]
   },
   {
     method: 'GET',
     route: '/:id',
     handlers: [
-      CategorySingle
+      OrderSingle
     ]
   },
   {
     method: 'PUT',
-    route: '/:id',
+    route: '/',
     handlers: [
       isAuthenticated,
-      CategoryUpdate
+      OrderUpdate
     ]
   },
   {
     method: 'DELETE',
-    route: '/:id',
+    route: '/',
     handlers: [
       isAuthenticated,
-      CategoryDelete
+      OrderDelete
     ]
   },
   {
     method: 'POST',
-    route: '/',
+    route: '/create',
     handlers: [
-      // isAuthenticated,
-      CategoryCreate
+      OrderCreate
+    ]
+  },
+  {
+    method: 'POST',
+    route: '/login',
+    handlers: [
+      OrderLogin
     ]
   }
 ];

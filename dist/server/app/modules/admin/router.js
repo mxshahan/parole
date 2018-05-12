@@ -1,38 +1,38 @@
 import { isAuthenticated } from '@mid';
 import {
-  contentAll,
-  contentSingle,
-  contentCreate,
-  contentUpdate,
-  contentDelete,
-  myContent,
-  userContent,
-  filterContent,
-  contentCategory
+  adminAll,
+  adminSingle,
+  adminCreate,
+  adminUpdate,
+  adminDelete,
+  myadmin,
+  useradmin,
+  filteradmin,
+  adminCategory
 } from './controller';
 
-export const baseUrl = '/api/content';
+export const baseUrl = '/api/admin';
 
 export const routes = [
   {
     method: 'GET',
     route: '/category',
     handlers: [
-      contentCategory
+      adminCategory
     ]
   },
   {
     method: 'GET',
     route: '/category/:filter',
     handlers: [
-      filterContent
+      filteradmin
     ]
   },
   {
     method: 'GET',
     route: '/user/:user',
     handlers: [
-      userContent
+      useradmin
     ]
   },
   {
@@ -40,21 +40,21 @@ export const routes = [
     route: '/my',
     handlers: [
       isAuthenticated,
-      myContent
+      myadmin
     ]
   },
   {
     method: 'GET',
     route: '/',
     handlers: [
-      contentAll
+      adminAll
     ]
   },
   {
     method: 'GET',
     route: '/:id',
     handlers: [
-      contentSingle
+      adminSingle
     ]
   },
   {
@@ -62,7 +62,7 @@ export const routes = [
     route: '/:id',
     handlers: [
       isAuthenticated,
-      contentUpdate
+      adminUpdate
     ]
   },
   {
@@ -70,7 +70,7 @@ export const routes = [
     route: '/:id',
     handlers: [
       isAuthenticated,
-      contentDelete
+      adminDelete
     ]
   },
   {
@@ -78,7 +78,7 @@ export const routes = [
     route: '/',
     handlers: [
       isAuthenticated,
-      contentCreate
+      adminCreate
     ]
   }
 ];

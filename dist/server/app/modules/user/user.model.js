@@ -1,29 +1,10 @@
-'use strict';
+import mongoose from 'mongoose';
+import uniqueValidator from 'mongoose-unique-validator';
+import timestamp from 'mongoose-timestamp';
+import { genSaltSync, hashSync } from 'bcryptjs';
+import { Crud } from '@utl';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.userModel = exports.userCrud = undefined;
-
-var _mongoose = require('mongoose');
-
-var _mongoose2 = _interopRequireDefault(_mongoose);
-
-var _mongooseUniqueValidator = require('mongoose-unique-validator');
-
-var _mongooseUniqueValidator2 = _interopRequireDefault(_mongooseUniqueValidator);
-
-var _mongooseTimestamp = require('mongoose-timestamp');
-
-var _mongooseTimestamp2 = _interopRequireDefault(_mongooseTimestamp);
-
-var _bcryptjs = require('bcryptjs');
-
-var _utility = require('../../utility');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const userSchema = new _mongoose2.default.Schema({
+const userSchema = new mongoose.Schema({
   firstname: {
     type: String,
     required: true
@@ -51,7 +32,7 @@ const userSchema = new _mongoose2.default.Schema({
     default: 'ordinary'
   },
   contents: [{
-    type: _mongoose2.default.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'contentModel'
   }],
   social: {
@@ -83,8 +64,8 @@ userSchema.pre('save', function hashPass(next) {
   let hash;
   if (this.isModified('password') || this.isNew) {
     try {
-      const salt = (0, _bcryptjs.genSaltSync)();
-      hash = (0, _bcryptjs.hashSync)(account.password, salt);
+      const salt = genSaltSync();
+      hash = hashSync(account.password, salt);
     } catch (e) {
       return next(e);
     } finally {
@@ -94,11 +75,13 @@ userSchema.pre('save', function hashPass(next) {
   return next();
 });
 
-userSchema.plugin(_mongooseUniqueValidator2.default);
-userSchema.plugin(_mongooseTimestamp2.default);
+userSchema.plugin(uniqueValidator);
+userSchema.plugin(timestamp);
 
-const userModel = _mongoose2.default.model('userModel', userSchema);
-const userCrud = new _utility.Crud(userModel);
+const userModel = mongoose.model('userModel', userSchema);
+const userCrud = new Crud(userModel);
 
-exports.userCrud = userCrud;
-exports.userModel = userModel;
+export {
+  userCrud,
+  userModel
+};
